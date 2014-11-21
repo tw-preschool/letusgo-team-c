@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pos Web</title>
+  <link rel="stylesheet" href="../styles/main.css"/>
+</head>
+
+<body>
+
+<nav>
+  <a href="#">Let's Go</a>
+  <ul>
+    <li><a href="../index.html">主页</a></li>
+    <li><a href="items.html">商品列表</a></li>
+    <li>
+      <a href="cart.html">购物车 (<span id="count">2</span>)</a>
+    </li>
+  </ul>
+</nav>
+
+<div>
+  <h3>商品列表</h3>
+  <table id="item-table">
+    <thead>
+    <tr>
+      <th>名称</th>
+      <th>单价(元)</th>
+      <th>单位</th>
+      <th></th>
+    </tr>
+    </thead>
+  </table>
+</div>
+
+<script type="text/javascript" src="../lib/jquery-2.1.1/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="../lib/bootstrap-3.2.0-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="../lib/lodash-2.4.1/lodash.compat.js"></script>
+<script type="text/javascript" src="../spec/fixtures.js"></script>
+<script type="text/javascript" src="../scripts/model/item.js"></script>
+<script type="text/javascript" src="../scripts/model/promotion.js"></script>
+<script type="text/javascript" src="../scripts/utils.js"></script>
+<script type="text/javascript" src="../scripts/main.js"></script>
+
+</body>
+</html>

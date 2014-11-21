@@ -1,10 +1,45 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 <head>
-	<meta charset="UTF-8">
-	<title>没钱赚商店</title>
+  <meta charset="utf-8">
+  <title>Pos Web</title>
+  <link rel="stylesheet" href="../styles/main.css"/>
 </head>
+
 <body>
-	
+
+<nav>
+  <a href="views/items.html">Let's Go</a>
+  <ul>
+    <li>
+      <a href="index.html">主页</a>
+    </li>
+    <li>
+      <a href="views/items.html">商品列表</a>
+    </li>
+    <li>
+      <a href="views/cart.html">购物车 (<span id="count">2</span>)</a>
+    </li>
+  </ul>
+</nav>
+
+<div>
+  <h1>Welcome to Let's Go!</h1>
+  <p>
+    商店里进行购物结算时会使用收银机（POS）系统，这台收银机会在结算时根据 客户的购物车（Cart）中的商品（Item）和商店正在进行的优惠活动（Promotion）进行结算和打印购物清单。
+    已知该商店正在对部分商品进行”买二赠一“的优惠活动。我们需要实现一个名为printInventory函数，该函数能够将指定格式的数据作为参数 输入，然后在浏览器的控制台中输出结算清单的文本。
+  </p>
+  <a href="views/items.html">Let's Go</a>
+</div>
+
+<script type="text/javascript" src="lib/jquery-2.1.1/jquery-2.1.1.js"></script>
+<script type="text/javascript" src="lib/bootstrap-3.2.0-dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="lib/lodash-2.4.1/lodash.compat.js"></script>
+<script type="text/javascript" src="../spec/fixtures.js"></script>
+<script type="text/javascript" src="../scripts/model/item.js"></script>
+<script type="text/javascript" src="../scripts/model/promotion.js"></script>
+<script type="text/javascript" src="../scripts/utils.js"></script>
+<script type="text/javascript" src="../scripts/main.js"></script>
+
 </body>
 </html>
