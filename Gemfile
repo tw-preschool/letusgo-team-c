@@ -4,8 +4,9 @@ gem 'sinatra'
 gem 'sqlite3'
 gem 'activerecord'
 gem 'rack-contrib'
+gem 'thin'
 
-group :development, :test do    
+group :development, :test do
   	gem 'rack-test'
     gem 'rspec'
     gem 'database_cleaner'
