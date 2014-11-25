@@ -27,10 +27,12 @@
   </div>
 </nav>
 
-<div>
-  <h3>商品列表</h3>
-  <table id="item-table">
+<div class="container theme-showcase" role="main">
+  <table id="item-table" class="table table-bordered" style="table-layout:fixed">
     <thead>
+    <tr>
+      <th class="active" colspan="4" style="text-align:center"><h4>商品列表</h4></th>
+    </tr>
     <tr>
       <th>名称</th>
       <th>单价(元)</th>
@@ -38,6 +40,11 @@
       <th></th>
     </tr>
     </thead>
+    <tbody>
+      <td>可口可乐</td>
+      <td>3</td>
+      <td>瓶</td>
+      <td><button class="btn btn-primary btn-small" role="button">加入购物车</button></td>
   </table>
 </div>
 
