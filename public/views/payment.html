@@ -28,11 +28,13 @@
   </div>
 </nav>
 
-<div>
-    <h4>购物清单</h4>
+<div class="container theme-showcase" role="main">
     <div id="pay-date"></div>
-    <table>
+    <table class="table table-bordered"  style="table-layout:fixed">
       <thead>
+      <tr>
+        <th class="active" colspan="5"><h4>购物清单</h4></th>
+      </tr>
       <tr>
         <th>名称</th>
         <th>单价(元)</th>
@@ -59,9 +61,11 @@
       </tbody>
     </table>
 
-    <h4>赠送商品</h4>
-    <table>
+    <table class="table table-bordered"  style="table-layout:fixed">
       <thead>
+      <tr>
+        <th class="active" colspan="3"><h4>赠送商品</h4></th>
+      </tr>
       <tr>
         <th>分类</th>
         <th>名称</th>
@@ -69,14 +73,15 @@
       </tr>
       </thead>
       <tbody>
+      <tr>
+        <td colspan="3" style="text-align:right">
+          <p>总计：<span>0.00元</span></p>
+          <p>节约：<span>0.00元</span></p>
+          <a href="items.html" class="btn btn-primary btn-small" role="button">确认</a>
+        </td>
+      </tr>
       </tbody>
     </table>
-
-    <div>
-      <p>总计：<span>0.00元</span></p>
-      <p>节约：<span>0.00元</span></p>
-      <a href="items.html">确认</a>
-    </div>
 </div>
 
 <script type="text/javascript" src="../lib/jquery-2.1.1/jquery-2.1.1.js"></script>
