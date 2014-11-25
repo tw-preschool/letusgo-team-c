@@ -29,6 +29,11 @@ class POSApplication < Sinatra::Base
         File.open('public/index.html').read
     end
 
+    get '/add' do
+        content_type :html
+        File.open('public/views/add.html').read
+    end
+
     get '/products' do
         begin
             products = Product.all || []
