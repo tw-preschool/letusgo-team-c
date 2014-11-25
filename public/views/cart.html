@@ -52,8 +52,10 @@
 
 <div class="container theme-showcase" role="main">
 <table class="table table-bordered">
-  <caption>购物清单</caption>
     <thead>
+    <tr>
+      <th class="active" colspan="5"><h4>购物清单</h4></th>
+    </tr>
     <tr>
       <th>名称</th>
       <th>单价(元)</th>
@@ -67,19 +69,35 @@
       <td>可口可乐</td>
       <td>3</td>
       <td>瓶</td>
-      <td>1</td>
+      <td>
+        <form class="form-inline" role="form">
+        <div class="input-group" >
+        <span class="input-group-btn"><button class="btn btn-default" type="button">-</button></span>
+        <input class="form-control"id="number" type="text" placeholder="1">
+        <span class="input-group-btn"><button class="btn btn-default" type="button">+</button></span>
+        </div>
+        </form>
+      </td>
       <td>3</td>
     </tr>
     <tr>
       <td>雪碧</td>
       <td>3</td>
       <td>瓶</td>
-      <td>1</td>
+      <td>
+        <form class="form-inline" role="form">
+        <div class="input-group" >
+        <span class="input-group-btn"><button class="btn btn-default" type="button">-</button></span>
+        <input class="form-control"id="number" type="text" placeholder="1">
+        <span class="input-group-btn"><button class="btn btn-default" type="button">+</button></span>
+        </div>
+        </form>
+      </td>
       <td>3</td>
     </tr>
     <tr>
       <td colspan="5" style="text-align:right"><p>总计：<span>6.00元</span></p>
-      <a href="./payment.html" class="btn btn-primary btn-lg" role="button">付款</a></td>
+      <a href="./payment.html" class="btn btn-primary btn-small" role="button">付款</a></td>
     </tr>
     </tbody>
 </table>
