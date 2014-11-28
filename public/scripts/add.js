@@ -9,8 +9,8 @@ $(document).ready(function(){
 	         data: {"name":name,"price":price,"unit":unit},
 	         dataType: "json",
 	         success: function(data){
-	                     if(!data){
-	                     	window.open(location.host+'/'+data);
+	                     if(data){
+	                     	window.open(location.host+'/'+data.message);
 	                     }
 	                  }
         });
