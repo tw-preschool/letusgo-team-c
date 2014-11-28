@@ -9,7 +9,9 @@ $(document).ready(function(){
 	         data: {"name":name,"price":price,"unit":unit},
 	         dataType: "json",
 	         success: function(data){
-	                     alert(data);
+	                     if(data){
+	                     	window.open(location.host+'/'+data.message);
+	                     }
 	                  }
         });
 	});
