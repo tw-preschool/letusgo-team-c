@@ -11,26 +11,31 @@
 
 <body>
 
-<nav class="navbar navbar-default" role="navigation">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="items.html">Let's Go</a>
-  </div>
-    <ul class="nav navbar-nav">
-      <li><a href="../index.html">主页</a></li>
-      <li><a href="items.html">商品列表</a></li>
-    </ul>
-  </div>
-  <div class="container row col-xs-１">
-    <ul class="nav navbar-nav navbar-right">
-    <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车 (<span id="count">2</span>)</a></li>
-    </ul>
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="items.html">Let's Go</a>
+    </div>
+    <div>
+      <ul class="nav navbar-nav">
+        <li><a href="../index.html">主页</a></li>
+        <li class="active"><a href="items.html">商品列表</a></li>
+      </ul>
+    </div>
+    <div class="container row col-xs-１">
+      <ul class="nav navbar-nav navbar-right">
+      <li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车 (<span id="count">2</span>)</a></li>
+      </ul>
+    </div>
   </div>
 </nav>
 
-<div>
-  <h3>商品列表</h3>
-  <table id="item-table">
+<div class="container theme-showcase" role="main">
+  <table id="item-table" class="table table-bordered" style="table-layout:fixed">
     <thead>
+    <tr>
+      <th class="active" colspan="4" style="text-align:center"><h4>商品列表</h4></th>
+    </tr>
     <tr>
       <th>名称</th>
       <th>单价(元)</th>
@@ -38,6 +43,11 @@
       <th></th>
     </tr>
     </thead>
+    <tbody>
+      <td>可口可乐</td>
+      <td>3</td>
+      <td>瓶</td>
+      <td><button class="btn btn-primary btn-small" role="button">加入购物车</button></td>
   </table>
 </div>
 
