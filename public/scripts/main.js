@@ -9,7 +9,7 @@ $(document).ready(function () {
           success: function(data) {
             var items = data;
             $.each(items, function (index, item) {
-              var addCart = '<button id="btn-'+index+'">加入购物车</button>';
+              var addCart = '<button class="btn btn-primary btn-small" id="btn-'+index+'">加入购物车</button>';
               var listItem = $('<tr class="itemRow">\
                                 <td>' + item.name + '</td>\
                                 <td>' + item.price + '</td>\
