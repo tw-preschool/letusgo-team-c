@@ -27,7 +27,12 @@ class POSApplication < Sinatra::Base
     end
 
     get '/delete' do
-        puts "hehe"
+        begin
+            product = Product.where(:name => params['name'])[0]
+            product.destroy
+        rescue  ActiveRecord::RecordNotFound => e
+            [404, {:message => e.message}.to_json]
+        end
     end
 
     get '/add' do
