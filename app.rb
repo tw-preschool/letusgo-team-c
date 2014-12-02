@@ -21,10 +21,6 @@ class POSApplication < Sinatra::Base
 
     use Rack::PostBodyContentTypeParser
 
-    # before do
-    #     content_type :json
-    # end
-
     get '/' do
         content_type :html
         File.open('public/index.html').read
@@ -56,8 +52,8 @@ class POSApplication < Sinatra::Base
 
     post '/products' do
         product = Product.create(:name => params[:name],
-                            :price => params[:price],
-                            :unit => params[:unit])
+            :price => params[:price],
+            :unit => params[:unit])
 
         if product.save
             [201, {:message => "products/#{product.id}"}.to_json]
@@ -67,6 +63,7 @@ class POSApplication < Sinatra::Base
     end
 
     get '/admin' do
+        @products = Product.all
         erb :admin
     end
 

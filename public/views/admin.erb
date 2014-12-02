@@ -36,12 +36,25 @@
             <th>名称</th>
             <th>单价(元)</th>
             <th>单位</th>
-            <th></th>
+            <th>管理</th>
           </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+          <% @products.each do |product| %>
+          <tr>
+            <td><%= product.name %></td>
+            <td><%= product.price %></td>
+            <td><%= product.unit %></td>
+            <td>
+              <a href="#">编辑</a>
+              <a href="#">删除</a>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
+    <a href="">添加商品</a>
   </div>
 
   <script type="text/javascript" src="../lib/jquery-2.1.1/jquery-2.1.1.js"></script>
@@ -51,7 +64,6 @@
   <script type="text/javascript" src="../scripts/model/item.js"></script>
   <script type="text/javascript" src="../scripts/model/promotion.js"></script>
   <script type="text/javascript" src="../scripts/utils.js"></script>
-  <script type="text/javascript" src="../scripts/main.js"></script>
 
 </body>
 </html>
