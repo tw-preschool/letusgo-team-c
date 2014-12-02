@@ -5,8 +5,6 @@
   <title>Pos Web</title>
   <link rel="stylesheet" href="../styles/main.css"/>
   <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <script src="../lib/jquery-2.1.1/jquery.mim.js"></script>
-  <script src="../lib/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -46,8 +44,8 @@
             <td><%= product.price %></td>
             <td><%= product.unit %></td>
             <td>
-              <a href="#">编辑</a>
-              <a href="#">删除</a>
+              <a href="#" class="edit-product">编辑</a>
+              <a href="#" class="delete-product">删除</a>
             </td>
           </tr>
           <% end %>
@@ -60,10 +58,10 @@
   <script type="text/javascript" src="../lib/jquery-2.1.1/jquery-2.1.1.js"></script>
   <script type="text/javascript" src="../lib/bootstrap-3.2.0-dist/js/bootstrap.js"></script>
   <script type="text/javascript" src="../lib/lodash-2.4.1/lodash.compat.js"></script>
-  <script type="text/javascript" src="../spec/fixtures.js"></script>
   <script type="text/javascript" src="../scripts/model/item.js"></script>
   <script type="text/javascript" src="../scripts/model/promotion.js"></script>
   <script type="text/javascript" src="../scripts/utils.js"></script>
+  <script type="text/javascript" src="../scripts/admin.js"></script>
 
 </body>
 </html>

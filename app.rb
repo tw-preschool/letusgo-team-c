@@ -26,6 +26,10 @@ class POSApplication < Sinatra::Base
         File.open('public/index.html').read
     end
 
+    get '/delete' do
+        puts "hehe"
+    end
+
     get '/add' do
         content_type :html
         File.open('public/views/add.html').read
