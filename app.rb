@@ -6,6 +6,7 @@ require 'json'
 require './models/product'
 
 class POSApplication < Sinatra::Base
+    set :views, settings.root + '/public/views'
     dbconfig = YAML.load(File.open("config/database.yml").read)
     
     configure :development do
@@ -20,9 +21,9 @@ class POSApplication < Sinatra::Base
 
     use Rack::PostBodyContentTypeParser
 
-    before do
-        content_type :json
-    end
+    # before do
+    #     content_type :json
+    # end
 
     get '/' do
         content_type :html
@@ -63,6 +64,10 @@ class POSApplication < Sinatra::Base
         else
             halt 500, {:message => "create product failed"}.to_json
         end
+    end
+
+    get '/admin' do
+        erb :admin
     end
 
     after do
