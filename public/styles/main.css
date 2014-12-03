@@ -5,3 +5,27 @@
 .shopping-list {
 	margin-bottom: 0px;
 }
+
+.overlay{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+
+.background{
+	height: 100%;
+	width: 100%;
+	background: #000;
+	opacity: 0.5;
+}
+
+.overlay .product{
+	position: absolute;
+	top: 60px;
+	width: 40%;
+	left: 30%;
+	padding: 10px 10px;
+	background: #fff;
+}
