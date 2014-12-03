@@ -44,8 +44,13 @@
             <td><%= product.price %></td>
             <td><%= product.unit %></td>
             <td>
-              <a href="#" class="edit-product">编辑</a>
-              <a href="#" class="delete-product">删除</a>
+               <a href="#" class="edit-product">
++              <span class="glyphicon glyphicon-edit"></span></a>
++              <a href="#" class="add-product">
++              <span class="glyphicon glyphicon-plus"></span></a>
++              <a href="#" class="delete-product">
++              <span class="glyphicon glyphicon-remove"></span></a>
++              <label class="pull-right"><input type="checkbox">买二送一</label>
             </td>
           </tr>
           <% end %>
