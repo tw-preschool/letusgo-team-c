@@ -30,3 +30,7 @@
 	padding: 10px 10px;
 	background: #fff;
 }
+.edit-product,.add-product,.delete-product{
+	color: #333;
+	margin: 0 10px 0 10px;
+}
