@@ -28,14 +28,47 @@ $(document).ready(function() {
 			event.preventDefault();
 			$('.overlay').fadeOut();
 		});
+		cancelButton();
+		editProduct();
 	}
 
 	function openAddLayer() {
 		$('.overlay').find('#submit').text('添加');
 		$('.overlay').fadeIn();
+		cancelButton();
+		addProduct();
+	}
+
+	function cancelButton() {
 		$('.overlay').find('#cancel').on('click', function(event) {
 			event.preventDefault();
 			$('.overlay').fadeOut();
+			console.log('cancel press');
+		});
+	}
+
+	function editProduct() {
+		$('.overlay').find('#submit').on('click', function(event){
+			event.preventDefault();
+			$('.overlay').fadeOut();
+			console.log('submit press');
+		});
+	}
+
+	function addProduct() {
+		$('#product-form')[0].reset();
+		$('.overlay').find('#submit').on('click', function(event){
+			event.preventDefault();
+			$('.overlay').fadeOut();
+			var name = $('#name').val();
+			var price = $('#price').val();
+			var unit = $('#unit').val();
+			$.ajax('/add', {
+				success: function(response) {
+					console.log('ok');
+				},
+				data: {"name": name, "price": price, "unit": unit }
+			});
 		});
 	}
 });
