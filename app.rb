@@ -8,7 +8,7 @@ require './models/product'
 class POSApplication < Sinatra::Base
     set :views, settings.root + '/public/views'
     dbconfig = YAML.load(File.open("config/database.yml").read)
-    
+
     configure :development do
         require 'sqlite3'
         ActiveRecord::Base.establish_connection(dbconfig['development'])
@@ -25,6 +25,19 @@ class POSApplication < Sinatra::Base
         content_type :html
         File.open('public/index.html').read
     end
+
+
+    post '/login' do
+        if  params[:name] == "admin" && params[:password] == "admin"
+            session['userName'] = params[:name]
+           do
+             redirect '/'
+           end
+        else
+           redirect '/login'
+        end
+    end
+
 
     get '/delete' do
         begin
@@ -80,4 +93,3 @@ class POSApplication < Sinatra::Base
         ActiveRecord::Base.connection.close
     end
 end
-
