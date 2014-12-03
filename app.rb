@@ -4,7 +4,7 @@ require 'active_record'
 require 'json'
 
 require './models/product'
-
+require './controllers/cart_controller'
 class POSApplication < Sinatra::Base
     set :views, settings.root + '/public/views'
     dbconfig = YAML.load(File.open("config/database.yml").read)
@@ -83,6 +83,10 @@ class POSApplication < Sinatra::Base
         erb :admin
     end
 
+    get '/shop' do
+        show_shoppingcart
+    end
+    
     after do
         ActiveRecord::Base.connection.close
     end
