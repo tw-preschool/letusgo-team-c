@@ -40,9 +40,9 @@
         <tbody>
           <% @products.each do |product| %>
           <tr>
-            <td><%= product.name %></td>
-            <td><%= product.price %></td>
-            <td><%= product.unit %></td>
+            <td class="product-name"><%= product.name %></td>
+            <td class="product-price"><%= product.price %></td>
+            <td class="product-unit"><%= product.unit %></td>
             <td>
               <a href="#" class="edit-product">
               <span class="glyphicon glyphicon-edit"></span></a>

@@ -35,7 +35,7 @@ class POSApplication < Sinatra::Base
         end
     end
 
-    get '/add' do
+    post '/add' do
         product = Product.new(:name => params[:name],
             :price => params[:price],
             :unit => params[:unit])
@@ -44,6 +44,21 @@ class POSApplication < Sinatra::Base
             [201, {:message => "products/#{product.id}"}.to_json]
         else
             halt 500, {:message => "create product failed"}.to_json
+        end
+    end
+
+    post '/edit' do
+        product = Product.where(:name => params['name']).first
+        product.attributes = {
+           :name => params[:newName],
+           :price => params[:price],
+           :unit => params[:unit]
+        }
+
+        if product.save
+            [201, {:message => "products/#{product.id}"}.to_json]
+        else
+            halt 500, {:message => "update product failed"}.to_json
         end
     end
 
