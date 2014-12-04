@@ -122,4 +122,27 @@ $(document).ready(function() {
 			openEditLayer();
 		});
 	}
+
+	$("input[name='promotion']").click(function() {
+		var tr = $(this).closest('tr');
+		var item_id = parseInt(tr.attr('id'));
+		var item_name = tr.children()[0].innerText;
+		var url = this.checked ? "/addPromotion" : "/deletePromotion";
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: {
+				"item_id": item_id,
+				"item_name": item_name
+			},
+			dataType: "json",
+			error: function(e) {
+				alert('Failed add the promotion on this product!');
+			},
+			success: function(data) {
+				alert('Suceess add the promotion on this product!');
+			}
+		});
+		
+	});
 });

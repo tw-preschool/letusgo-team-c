@@ -102,6 +102,14 @@ class POSApplication < Sinatra::Base
         show_shoppingcart
     end
     
+    post '/addPromotion' do
+        puts params[:item_name]
+        add_promotion(params[:item_id])
+    end
+
+    post '/deletePromotion' do
+        delete_promotion(params[:item_id])
+    end
     after do
         ActiveRecord::Base.connection.close
     end
