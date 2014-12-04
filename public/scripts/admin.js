@@ -25,39 +25,6 @@ $(document).ready(function() {
 		});
 	});
 
-
-
-
-	$('.overlay').find('#submit').on('click', function(event){
-		event.preventDefault();
-		$('.overlay').fadeOut();
-		var name = $('#name').val();
-		var price = $('#price').val();
-		var unit = $('#unit').val();
-		var promoted = $("input[id='promoted']").is(':checked') ? "true" : "false";
-		if($(this).text() == '添加') {
-			$.ajax('/add', {
-				success: function(response) {
-					console.log('ok');
-				},
-				type: 'post',
-				data: {"name": name, "price": price, "unit": unit, "promoted":promoted },
-				complete: showAddProductLine(name, price, unit, promoted)
-			});
-		} else if($(this).text() == '更新') {
-			$.ajax('/edit', {
-				success: function(response) {
-					console.log('ok');
-				},
-				type: 'post',
-				data: {"name": name, "price": price, "unit": unit },
-				complete: function() {
-
-				}
-			});
-		}		
-	});
-
 	$('.overlay').find('#cancel').on('click', function(event) {
 		event.preventDefault();
 		$('.overlay').fadeOut();
@@ -99,6 +66,24 @@ $(document).ready(function() {
 		$('.overlay').find('#submit').text('添加');
 		$('.overlay').fadeIn();
 		$('#product-form')[0].reset();	
+		console.log(promoted);
+		$('.overlay').find('#submit').off();
+		$('.overlay').find('#submit').on('click', function(event){
+			event.preventDefault();
+			$('.overlay').fadeOut();
+			var name = $('#name').val();
+			var price = $('#price').val();
+			var unit = $('#unit').val();
+			var promoted = $("input[id='promoted']").is(':checked') ? "true" : "false";		
+			$.ajax('/add', {
+				success: function(response) {
+					console.log('ok');
+				},
+				type: 'post',
+				data: {"name": name, "price": price, "unit": unit, "promoted":promoted },
+				complete: showAddProductLine(name, price, unit, promoted)
+			});		
+		});	
 	}
 
 	function showAddProductLine(name, price, unit,promoted) {
