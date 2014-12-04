@@ -96,7 +96,9 @@ class POSApplication < Sinatra::Base
     end
 
     get '/admin' do
-        @products = Product.all
+        products = Product.all
+        @products = products
+        @count = products.length
         erb :admin
     end
 
