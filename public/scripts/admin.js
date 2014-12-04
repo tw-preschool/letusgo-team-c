@@ -128,7 +128,11 @@ $(document).ready(function() {
 			},
 			dataType: "json",
 			complete: function(){
-				alert('Suceess add the promotion on this product!');
+				if(url == "/addPromotion") {
+					alert('Suceess add the promotion on this product!');
+				} else {
+					alert('Suceess remove the promotion on this product!');
+				}
 			}
 		});
 		
