@@ -11,9 +11,13 @@ $(document).ready(function(){
       }
     sendMessage(name,password);
     });
-});
-var sendMessage = function(name,password){
 
+    $(".manager-authority").on("click",function(){
+      window.location.href = "/admin";
+    });
+});
+
+var sendMessage = function(name,password){
   $.ajax({
     type: "POST",
     url: "/login",
@@ -21,9 +25,11 @@ var sendMessage = function(name,password){
     dataType: "json",
     success: function(data){
       if(data === true){
-        alert("登陆成功");
+        alert("登陆成功!");
+        window.location.href = "/admin";
       }else{
         alert("登陆失败，请重新登陆!");
+        window.location.href = "/login";
       }
 
     }

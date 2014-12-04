@@ -41,8 +41,9 @@ class POSApplication < Sinatra::Base
       end
     end
 
-    get '/judgeLogin' do
-       return session[:admin].to_json
+    get '/login' do
+      content_type :html
+      File.open('public/views/login.html').read
     end
 
 
@@ -100,10 +101,6 @@ class POSApplication < Sinatra::Base
         @products = Product.all
         erb :admin
     end
-
-
-
-
 
     after do
         ActiveRecord::Base.connection.close
