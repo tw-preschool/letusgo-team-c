@@ -1,8 +1,9 @@
 
-def load_product
-     products = Product.all || []
-     @product =product;
-     erb :items
+def load_products
+    products = Product.all
+    @products = products
+    @count = products.length
+    erb :items
 end
 
 def show_shoppingcart

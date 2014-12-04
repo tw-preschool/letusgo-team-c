@@ -64,8 +64,9 @@ class POSApplication < Sinatra::Base
         end
     end
 
-    get '/views/items' do
-       
+    get '/items' do
+       load_products
+        
     end
 
 
