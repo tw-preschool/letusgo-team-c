@@ -43,12 +43,12 @@
           </tr>
         </thead>
         <tbody>
-           <% @items.each do |item| %>
-             <tr id=<%= item.id %>>
-              <td><%= item.name %></td>
-              <td><%= item.price %></td>
-              <td><%= item.unit %></td>
-              <td><%= item.num %></td>
+           <% @products.each do |product| %>
+             <tr id=<%= product.id %>>
+              <td><%= product.name %></td>
+              <td><%= product.price %></td>
+              <td><%= product.unit %></td>
+              <td>num</td>
               <td>3</td>
             </tr>
           <% end %>
