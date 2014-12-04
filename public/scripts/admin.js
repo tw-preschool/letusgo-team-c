@@ -21,43 +21,7 @@ $(document).ready(function() {
 		});
 	});
 
-	function openEditLayer() {
-		$('.overlay').find('#submit').text('更新');
-		$('.overlay').fadeIn();
-		$('.overlay').find('#cancel').on('click', function(event) {
-			event.preventDefault();
-			$('.overlay').fadeOut();
-		});
-		cancelButton();
-		editProduct();
-	}
-
-	function openAddLayer() {
-		$('.overlay').find('#submit').text('添加');
-		$('.overlay').fadeIn();
-		cancelButton();
-		addProduct();
-	}
-
-	function cancelButton() {
-		$('.overlay').find('#cancel').on('click', function(event) {
-			event.preventDefault();
-			$('.overlay').fadeOut();
-			console.log('cancel press');
-		});
-	}
-
-	function editProduct() {
-		$('.overlay').find('#submit').on('click', function(event){
-			event.preventDefault();
-			$('.overlay').fadeOut();
-			console.log('submit press');
-		});
-	}
-
-	function addProduct() {
-		$('#product-form')[0].reset();
-		$('.overlay').find('#submit').on('click', function(event){
+	$('.overlay').find('#submit').on('click', function(event){
 			event.preventDefault();
 			$('.overlay').fadeOut();
 			var name = $('#name').val();
@@ -67,9 +31,64 @@ $(document).ready(function() {
 				success: function(response) {
 					console.log('ok');
 				},
-				data: {"name": name, "price": price, "unit": unit }
+				data: {"name": name, "price": price, "unit": unit },
+				complete: showAddProductLine(name, price, unit)
 			});
 		});
+
+	$('.overlay').find('#cancel').on('click', function(event) {
+			event.preventDefault();
+			$('.overlay').fadeOut();
+		});
+
+	function openEditLayer() {
+		$('.overlay').find('#submit').text('更新');
+		$('.overlay').fadeIn();
+		editProduct();
+	}
+
+	function openAddLayer() {
+		$('.overlay').find('#submit').text('添加');
+		$('.overlay').fadeIn();
+		addProduct();
+	}
+
+	function editProduct() {
+	
+	}
+
+	function showAddProductLine(name, price, unit) {
+		var manage = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>' +
+            '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>' +
+            '<label class="pull-right"><input type="checkbox">买二送一</label>';
+		var listItem = $("<tr><td>" + name + "</td><td>" + price 
+			+ "</td><td>" + unit + "</td><td>" + manage + "</td></tr>");
+		$('#item-table').find('tbody').append(listItem);
+
+		listItem.find('.delete-product').on('click', function(event) {
+			event.preventDefault();
+			var productName = $(this).closest('tr').find('td').first().text();
+			$(this).closest('tr').remove();
+			$.ajax('/delete', {
+				success: function(response) {
+					console.log('ok');
+				},
+				data: {"name": productName}
+			});
+		});
+
+		listItem.find('.edit-product').on('click', function(event) {
+			event.preventDefault();
+			openEditLayer();
+		});
+	}
+
+	function addProduct() {
+		$('#product-form')[0].reset();		
+	}
+
+	function deleteProduct() {
+
 	}
 	
 	$("input[name='promotion']").click(function() {
