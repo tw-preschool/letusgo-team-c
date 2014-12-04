@@ -24,12 +24,13 @@ class POSApplication < Sinatra::Base
     end
 
 
-    use Rack::Session::Pool, :expire_after => 1200
+    use Rack::Session::Pool, :expire_after => 2592000
     configure do
       enable :sessions
       set :username, 'admin'
       set :password, 'admin'
     end
+
 
     post '/login' do
       if params[:name] == settings.username && params[:password] == settings.password
@@ -44,6 +45,10 @@ class POSApplication < Sinatra::Base
     get '/login' do
       content_type :html
       File.open('public/views/login.html').read
+    end
+
+    get '/judgelogin' do
+        return session[:admin].to_json
     end
 
 

@@ -11,10 +11,6 @@ $(document).ready(function(){
       }
     sendMessage(name,password);
     });
-
-    $(".manager-authority").on("click",function(){
-      window.location.href = "/admin";
-    });
 });
 
 var sendMessage = function(name,password){
