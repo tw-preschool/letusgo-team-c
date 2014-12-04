@@ -64,13 +64,8 @@ class POSApplication < Sinatra::Base
         end
     end
 
-    get '/products' do
-        begin
-            products = Product.all || []
-            products.to_json
-        rescue ActiveRecord::RecordNotFound => e
-            [404, {:message => e.message}.to_json]
-        end
+    get '/views/items' do
+       
     end
 
 
@@ -84,7 +79,14 @@ class POSApplication < Sinatra::Base
     end
 
     post '/products' do
-       load_product
+        product = Product.create(:name => params[:name],
+            :price => params[:price],
+            :unit => params[:unit])
+            if product.save
+                [201, {:message => "products/#{product.id}"}.to_json]
+            else
+                halt 500, {:message => "create product failed"}.to_json
+            end
     end
     
     get '/admin' do

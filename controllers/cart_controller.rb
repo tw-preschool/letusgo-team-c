@@ -1,15 +1,8 @@
 
 def load_product
-	 product = Product.create(:name => params[:name],
-            :price => params[:price],
-            :unit => params[:unit])
-	 @product =product;
-	 erb :items
-        if product.save
-            #[201, {:message => "products/#{product.id}"}.to_json]
-        else
-            #halt 500, {:message => "create product failed"}.to_json
-        end
+     products = Product.all || []
+     @product =product;
+     erb :items
 end
 
 def show_shoppingcart
