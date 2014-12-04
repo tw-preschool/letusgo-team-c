@@ -21,20 +21,26 @@ $(document).ready(function() {
 		});
 	});
 
-	$('.overlay').find('#submit').on('click', function(event){
-			event.preventDefault();
-			$('.overlay').fadeOut();
-			var name = $('#name').val();
-			var price = $('#price').val();
-			var unit = $('#unit').val();
-			$.ajax('/add', {
-				success: function(response) {
-					console.log('ok');
-				},
-				data: {"name": name, "price": price, "unit": unit },
-				complete: showAddProductLine(name, price, unit)
-			});
+	$('.overlay').find('#submit').on('click', function(event) {
+		event.preventDefault();
+		$('.overlay').fadeOut();
+		var name = $('#name').val();
+		var price = $('#price').val();
+		var unit = $('#unit').val();
+		var promoted = $("input[id='promoted']").is(':checked') ? "true" : "false";
+		$.ajax('/add', {
+			success: function(response) {
+				console.log('ok');
+			},
+			data: {
+				"name": name,
+				"price": price,
+				"unit": unit,
+				"promoted": promoted
+			},
+			complete: showAddProductLine(name, price, unit,promoted)
 		});
+	});
 
 	$('.overlay').find('#cancel').on('click', function(event) {
 			event.preventDefault();
@@ -57,10 +63,11 @@ $(document).ready(function() {
 	
 	}
 
-	function showAddProductLine(name, price, unit) {
+	function showAddProductLine(name, price, unit,promoted) {
+		var check = promoted == "true"?"checked":"unchecked";
 		var manage = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>' +
             '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>' +
-            '<label class="pull-right"><input type="checkbox">买二送一</label>';
+            '<label class="pull-right"><input type="checkbox" id="promoted" '+ ' ' + check +'>买二送一</label>';
 		var listItem = $("<tr><td>" + name + "</td><td>" + price 
 			+ "</td><td>" + unit + "</td><td>" + manage + "</td></tr>");
 		$('#item-table').find('tbody').append(listItem);

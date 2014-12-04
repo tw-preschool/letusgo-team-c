@@ -39,7 +39,7 @@
         </thead>
         <tbody>
           <% @products.each do |product| %>
-          <tr id=<%= product.id %>>
+          <tr id=<%= product.id %> >
             <td><%= product.name %></td>
             <td><%= product.price %></td>
             <td><%= product.unit %></td>
@@ -48,7 +48,9 @@
               <span class="glyphicon glyphicon-edit"></span></a>
               <a href="#" class="delete-product">
               <span class="glyphicon glyphicon-remove"></span></a>
-              <label class="pull-right"><input type="checkbox" name="promotion">买二送一</label>
+              <label class="pull-right">
+                <input type="checkbox" name="promotion" <%= product.promoted =="true"?"checked":"unchecked" %> >买二送一
+              </label>
             </td>
           </tr>
           <% end %>
@@ -75,8 +77,16 @@
              <label for="unit">单位</label>
              <input type="text" id="unit" class="form-control" placeholder="">
            </div>
-           <button id="submit" class="btn btn-primary"></button>
-           <button id="cancel" class="btn btn-primary">取消</button>
+           <div class="checkbox">
+            <label>
+              <input type="checkbox" id="promoted">买二送一
+            </label>
+           </div>    
+          <button id="submit" class="btn btn-primary">添加</button>
+          <button id="cancel" class="btn btn-primary">取消</button>
+          <!-- <label for="promoted">
+              <input type="checkbox" id="promoted" class="form-control" placeholder="">买二送一
+          </label> -->
          </fieldset>
        </form>
    </div>

@@ -38,7 +38,9 @@ class POSApplication < Sinatra::Base
     get '/add' do
         product = Product.new(:name => params[:name],
             :price => params[:price],
-            :unit => params[:unit])
+            :unit => params[:unit],
+            :promoted => params[:promoted])
+        puts params[:promoted]
 
         if product.save
             [201, {:message => "products/#{product.id}"}.to_json]
