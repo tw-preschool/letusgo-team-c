@@ -71,29 +71,12 @@ $(document).ready(function() {
 		$('.overlay').find('#submit').on('click', function(event){
 			event.preventDefault();
 			$('.overlay').fadeOut();
-			var name = $('#name').val();
-			var price = $('#price').val();
-			var unit = $('#unit').val();
-			var promoted = "false";		
-			$.ajax('/add', {
-				success: function(response) {
-					showAddProductLine(name, price, unit, promoted, response.productId)
-				},
-				type: 'post',
-				dataType: 'json',
-				data: {"name": name, "price": price, "unit": unit, "promoted": promoted },
-			});		
+			addProduct($('#name').val(), $('#price').val(), $('#unit').val(), "false");			
 		});	
 	}
-
+	
 	function showAddProductLine(name, price, unit, promoted, productId) {
-		var check = promoted == "true" ? "checked" : "unchecked";
-		var editLink = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>';
-		var deleteLink = '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>';
-		var checkBoxLink = '<label class="pull-right"><input type="checkbox" name="promotion" '+ ' ' + check +'>买二送一</label>';
-		var listItem = $('<tr id=' + productId + '><td class="product-name">' + name + '</td><td class="product-price">' + price 
-			+ '</td><td class="product-unit">' + unit + "</td><td>" + editLink + deleteLink + checkBoxLink + 
-			"</td></tr>");
+		var listItem = generateNewProductItem(name, price, unit, promoted, productId);
 		$('#item-table').find('tbody').append(listItem);
 
 		listItem.find('.delete-product').on('click', function(event) {
@@ -137,6 +120,17 @@ $(document).ready(function() {
 		});	
 	}
 
+	function addProduct(name, price, unit, promoted) {
+		$.ajax('/add', {
+			success: function(response) {
+				showAddProductLine(name, price, unit, promoted, response.productId)
+			},
+			type: 'post',
+			dataType: 'json',
+			data: {"name": name, "price": price, "unit": unit, "promoted": promoted },
+		});
+	}
+
 	function deleteProductByName(productName) {
 		$.ajax('/delete', {
 			success: function(response) {
@@ -145,4 +139,16 @@ $(document).ready(function() {
 			data: {"name": productName}
 		});
 	}
+
+	function generateNewProductItem(name, price, unit, promoted, productId) {
+		var check = promoted == "true" ? "checked" : "unchecked";
+		var editLink = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>';
+		var deleteLink = '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>';
+		var checkBoxLink = '<label class="pull-right"><input type="checkbox" name="promotion" '+ ' ' + check +'>买二送一</label>';
+		var listItem = $('<tr id=' + productId + '><td class="product-name">' + name + '</td><td class="product-price">' + price 
+			+ '</td><td class="product-unit">' + unit + "</td><td>" + editLink + deleteLink + checkBoxLink + 
+			"</td></tr>");
+		return listItem;
+	}
+
 });
