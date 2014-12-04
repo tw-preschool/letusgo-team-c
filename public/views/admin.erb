@@ -39,66 +39,55 @@
         </thead>
         <tbody>
           <% @products.each do |product| %>
-          <tr id=<%= product.id %> >
-            <td><%= product.name %></td>
-            <td><%= product.price %></td>
-            <td><%= product.unit %></td>
+          <tr id=<%= product.id %>>
+            <td class="product-name"><%= product.name %></td>
+            <td class="product-price"><%= product.price %></td>
+            <td class="product-unit"><%= product.unit %></td>
             <td>
               <a href="#" class="edit-product">
-              <span class="glyphicon glyphicon-edit"></span></a>
-              <a href="#" class="delete-product">
-              <span class="glyphicon glyphicon-remove"></span></a>
-              <label class="pull-right">
-                <input type="checkbox" name="promotion" <%= product.promoted =="true"?"checked":"unchecked" %> >买二送一
-              </label>
-            </td>
-          </tr>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
-    <button type="button" class="btn btn-primary add-product">添加商品</button>
-  </div>
+                <span class="glyphicon glyphicon-edit"></span></a>
+                <a href="#" class="delete-product">
+                  <span class="glyphicon glyphicon-remove"></span></a>
+                  <label class="pull-right"><input type="checkbox" name="promotion">买二送一</label>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+        <button type="button" class="btn btn-primary add-product">添加商品</button>
+      </div>
 
-  <div class="overlay">
-    <div class="background"></div>
-    <div class="container product">
-        <form id="product-form" role="form">
-          <fieldset>
-            <div class="form-group">
-             <label for="name">商品名称</label>
-             <input type="text" id="name" class="form-control" placeholder="">
-           </div>
-           <div class="form-group">
-             <label for="price">商品单价</label>
-             <input type="text" id="price" class="form-control" placeholder="">
-           </div>
-           <div class="form-group">
-             <label for="unit">单位</label>
-             <input type="text" id="unit" class="form-control" placeholder="">
-           </div>
-           <div class="checkbox">
-            <label>
-              <input type="checkbox" id="promoted">买二送一
-            </label>
-           </div>    
-          <button id="submit" class="btn btn-primary">添加</button>
-          <button id="cancel" class="btn btn-primary">取消</button>
-          <!-- <label for="promoted">
-              <input type="checkbox" id="promoted" class="form-control" placeholder="">买二送一
-          </label> -->
-         </fieldset>
-       </form>
-   </div>
- </div>
+      <div class="overlay">
+        <div class="background"></div>
+        <div class="container product">
+          <form id="product-form" role="form">
+            <fieldset>
+              <div class="form-group">
+               <label for="name">商品名称</label>
+               <input type="text" id="name" class="form-control" placeholder="">
+             </div>
+             <div class="form-group">
+               <label for="price">商品单价</label>
+               <input type="text" id="price" class="form-control" placeholder="">
+             </div>
+             <div class="form-group">
+               <label for="unit">单位</label>
+               <input type="text" id="unit" class="form-control" placeholder="">
+             </div>
+             <button id="submit" class="btn btn-primary"></button>
+             <button id="cancel" class="btn btn-primary">取消</button>
+           </fieldset>
+         </form>
+       </div>
+     </div>
+     <script type="text/javascript" src="../lib/jquery-2.1.1/jquery-2.1.1.js"></script>
+     <script type="text/javascript" src="../lib/bootstrap-3.2.0-dist/js/bootstrap.js"></script>
+     <script type="text/javascript" src="../lib/lodash-2.4.1/lodash.compat.js"></script>
+     <script type="text/javascript" src="../scripts/model/item.js"></script>
+     <script type="text/javascript" src="../scripts/model/promotion.js"></script>
+     <script type="text/javascript" src="../scripts/utils.js"></script>
+     <script type="text/javascript" src="../scripts/admin.js"></script>
 
-  <script type="text/javascript" src="../lib/jquery-2.1.1/jquery-2.1.1.js"></script>
-  <script type="text/javascript" src="../lib/bootstrap-3.2.0-dist/js/bootstrap.js"></script>
-  <script type="text/javascript" src="../lib/lodash-2.4.1/lodash.compat.js"></script>
-  <script type="text/javascript" src="../scripts/model/item.js"></script>
-  <script type="text/javascript" src="../scripts/model/promotion.js"></script>
-  <script type="text/javascript" src="../scripts/utils.js"></script>
-  <script type="text/javascript" src="../scripts/admin.js"></script>
-
-</body>
-</html>
+   </body>
+   </html>
