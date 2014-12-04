@@ -4,8 +4,7 @@ require 'active_record'
 require 'json'
 
 require './models/product'
-
-
+require './controllers/cart_controller'
 
 class POSApplication < Sinatra::Base
     set :views, settings.root + '/public/views'
@@ -66,20 +65,43 @@ class POSApplication < Sinatra::Base
         end
     end
 
-    get '/add' do
-        content_type :html
-        File.open('public/views/add.html').read
-    end
+    post '/add' do
+        product = Product.new(:name => params[:name],
+            :price => params[:price],
+            :unit => params[:unit],
+            :promoted => params[:promoted])
+        puts params[:promoted]
 
-    get '/products' do
-        begin
-            products = Product.all || []
-            products.to_json
-        rescue ActiveRecord::RecordNotFound => e
-            [404, {:message => e.message}.to_json]
+        if product.save
+            [201, {:message => "products/#{product.id}"}.to_json]
+        else
+            halt 500, {:message => "create product failed"}.to_json
         end
     end
 
+    post '/edit' do
+        product = Product.where(:name => params['name']).first
+        product.attributes = {
+           :name => params[:newName],
+           :price => params[:price],
+           :unit => params[:unit]
+        }
+
+        if product.save
+            [201, {:message => "products/#{product.id}"}.to_json]
+        else
+            halt 500, {:message => "update product failed"}.to_json
+        end
+    end
+
+    get '/items' do
+       load_products
+
+    end
+
+    post '/items' do
+        add_into_cart(params[:name],params[:price],params[:unit],params[:num])
+    end
 
     get '/products/:id' do
         begin
@@ -94,19 +116,32 @@ class POSApplication < Sinatra::Base
         product = Product.create(:name => params[:name],
             :price => params[:price],
             :unit => params[:unit])
-
-        if product.save
-            [201, {:message => "products/#{product.id}"}.to_json]
-        else
-            halt 500, {:message => "create product failed"}.to_json
-        end
+            if product.save
+                [201, {:message => "products/#{product.id}"}.to_json]
+            else
+                halt 500, {:message => "create product failed"}.to_json
+            end
     end
 
     get '/admin' do
-        @products = Product.all
+        products = Product.all
+        @products = products
+        @count = products.length
         erb :admin
     end
 
+    get '/shop' do
+        show_shoppingcart
+    end
+
+    post '/addPromotion' do
+        puts params[:item_name]
+        add_promotion(params[:item_id])
+    end
+
+    post '/deletePromotion' do
+        delete_promotion(params[:item_id])
+    end
     after do
         ActiveRecord::Base.connection.close
     end
