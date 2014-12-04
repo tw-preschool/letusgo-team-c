@@ -76,22 +76,22 @@ $(document).ready(function() {
 			var promoted = "false";		
 			$.ajax('/add', {
 				success: function(response) {
-					console.log('ok');
+					showAddProductLine(name, price, unit, promoted, response.productId)
 				},
 				type: 'post',
+				dataType: 'json',
 				data: {"name": name, "price": price, "unit": unit, "promoted": promoted },
-				complete: showAddProductLine(name, price, unit, promoted)
 			});		
 		});	
 	}
 
-	function showAddProductLine(name, price, unit,promoted) {
+	function showAddProductLine(name, price, unit, promoted, productId) {
 		var check = promoted == "true" ? "checked" : "unchecked";
         var editLink = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>';
         var deleteLink = '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>';
-        var chechBoxLink = '<label class="pull-right"><input type="checkbox" id="promoted" '+ ' ' + check +'>买二送一</label>';
-		var listItem = $('<tr><td class="product-name">' + name + '</td><td class="product-price">' + price 
-			+ '</td><td class="product-unit">' + unit + "</td><td>" + editLink + deleteLink + chechBoxLink + 
+        var checkBoxLink = '<label class="pull-right"><input type="checkbox" name="promotion" '+ ' ' + check +'>买二送一</label>';
+		var listItem = $('<tr id=' + productId + '><td class="product-name">' + name + '</td><td class="product-price">' + price 
+			+ '</td><td class="product-unit">' + unit + "</td><td>" + editLink + deleteLink + checkBoxLink + 
 			"</td></tr>");
 		$('#item-table').find('tbody').append(listItem);
 
@@ -111,29 +111,70 @@ $(document).ready(function() {
 			event.preventDefault();
 			openEditLayer(name, price, unit, listItem);
 		});
+
+		listItem.find("input[name='promotion']").click(function() {
+			var tr = $(this).closest('tr');
+			var item_id = parseInt(tr.attr('id'));
+			var item_name = tr.children()[0].innerText;
+			var post_url = this.checked ? "/addPromotion" : "/deletePromotion";
+			$.ajax({
+				type: "POST",
+				url: post_url,
+				data: {
+					"item_id": item_id,
+					"item_name": item_name
+				},
+				dataType: "json",
+				complete: function(){
+					if(post_url == "/addPromotion") {
+						alert('Suceess add the promotion on this product!');
+					} else {
+						alert('Suceess remove the promotion on this product!');
+					}
+				}
+			});	
+		});
 	}
 
 	$("input[name='promotion']").click(function() {
 		var tr = $(this).closest('tr');
 		var item_id = parseInt(tr.attr('id'));
 		var item_name = tr.children()[0].innerText;
-		var url = this.checked ? "/addPromotion" : "/deletePromotion";
+		var post_url = this.checked ? "/addPromotion" : "/deletePromotion";
 		$.ajax({
 			type: "POST",
-			url: url,
+			url: post_url,
 			data: {
 				"item_id": item_id,
 				"item_name": item_name
 			},
 			dataType: "json",
 			complete: function(){
-				if(url == "/addPromotion") {
+				if(post_url == "/addPromotion") {
 					alert('Suceess add the promotion on this product!');
 				} else {
 					alert('Suceess remove the promotion on this product!');
 				}
 			}
-		});
-		
+		});	
 	});
+
+	function changePromotionStatus(item_id, item_name, post_url) {
+		$.ajax({
+			type: "POST",
+			url: post_url,
+			data: {
+				"item_id": item_id,
+				"item_name": item_name
+			},
+			dataType: "json",
+			complete: function(){
+				if(post_url == "/addPromotion") {
+					alert('Suceess add the promotion on this product!');
+				} else {
+					alert('Suceess remove the promotion on this product!');
+				}
+			}
+		});	
+	}
 });
