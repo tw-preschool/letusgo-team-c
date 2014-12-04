@@ -34,14 +34,15 @@ $(document).ready(function() {
 		var name = $('#name').val();
 		var price = $('#price').val();
 		var unit = $('#unit').val();
+		var promoted = $("input[id='promoted']").is(':checked') ? "true" : "false";
 		if($(this).text() == '添加') {
 			$.ajax('/add', {
 				success: function(response) {
 					console.log('ok');
 				},
 				type: 'post',
-				data: {"name": name, "price": price, "unit": unit },
-				complete: showAddProductLine(name, price, unit)
+				data: {"name": name, "price": price, "unit": unit, "promoted":promoted },
+				complete: showAddProductLine(name, price, unit, promoted)
 			});
 		} else if($(this).text() == '更新') {
 			$.ajax('/edit', {
@@ -101,7 +102,7 @@ $(document).ready(function() {
 	}
 
 	function showAddProductLine(name, price, unit,promoted) {
-		var check = promoted == "true"?"checked":"unchecked";
+		var check = promoted == "true" ? "checked" : "unchecked";
 		var manage = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>' +
             '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>' +
             '<label class="pull-right"><input type="checkbox" id="promoted" '+ ' ' + check +'>买二送一</label>';
@@ -140,10 +141,7 @@ $(document).ready(function() {
 				"item_name": item_name
 			},
 			dataType: "json",
-			error: function(e) {
-				alert('Failed add the promotion on this product!');
-			},
-			success: function(data) {
+			complete: function(){
 				alert('Suceess add the promotion on this product!');
 			}
 		});
