@@ -4,6 +4,7 @@ require 'active_record'
 require 'json'
 
 require './models/product'
+require './models/item'
 require './controllers/cart_controller'
 
 class POSApplication < Sinatra::Base
@@ -99,6 +100,11 @@ class POSApplication < Sinatra::Base
 
     post '/items' do
         add_into_cart(params[:name],params[:price],params[:unit])
+        item = Item.create(:name => params[:name],
+                            :price => params[:price],
+                            :unit => params[:unit]
+                             )
+        puts item.num
 
     end
 
@@ -141,6 +147,8 @@ class POSApplication < Sinatra::Base
     post '/deletePromotion' do
         delete_promotion(params[:item_id])
     end
+
+
     after do
         ActiveRecord::Base.connection.close
     end
