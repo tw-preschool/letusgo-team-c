@@ -5,17 +5,15 @@ $(document).ready(function () {
         var name = tr.children()[0].innerText;
         var price = parseInt(tr.children()[1].innerText);
         var unit = tr.children()[2].innerText;
-        var num =  parseInt(tr.children()[3].children[0].value);
         var cartNum = parseInt($("#count").html());
-        $("#count").html(cartNum+num);
+        $("#count").html(cartNum+1);
         $.ajax({
             type: "POST",
             url: "/items",
-            data: {      
+            data: {
                 "name": name,
                 "price": price,
                 "unit": unit,
-                "num": num
             },
             dataType: "json",
             success: function(){

@@ -8,7 +8,7 @@ require './controllers/cart_controller'
 class POSApplication < Sinatra::Base
     set :views, settings.root + '/public/views'
     dbconfig = YAML.load(File.open("config/database.yml").read)
-    
+
     configure :development do
         require 'sqlite3'
         ActiveRecord::Base.establish_connection(dbconfig['development'])
@@ -66,11 +66,11 @@ class POSApplication < Sinatra::Base
 
     get '/items' do
        load_products
-        
+
     end
-    
-    post '/items' do 
-        add_into_cart(params[:name],params[:price],params[:unit],params[:num])
+
+    post '/items' do
+        add_into_cart(params[:name],params[:price],params[:unit])
     end
 
     get '/products/:id' do
@@ -92,7 +92,7 @@ class POSApplication < Sinatra::Base
                 halt 500, {:message => "create product failed"}.to_json
             end
     end
-    
+
     get '/admin' do
         products = Product.all
         @products = products
@@ -103,7 +103,7 @@ class POSApplication < Sinatra::Base
     get '/shop' do
         show_shoppingcart
     end
-    
+
     post '/addPromotion' do
         puts params[:item_name]
         add_promotion(params[:item_id])
@@ -116,4 +116,3 @@ class POSApplication < Sinatra::Base
         ActiveRecord::Base.connection.close
     end
 end
-

@@ -6,8 +6,8 @@ def load_products
     erb :items
 end
 
-def add_into_cart(name,price,unit,num)
-    puts name,price,unit,num
+def add_into_cart(name,price,unit)
+    puts name,price,unit
 end
 
 def show_shoppingcart
@@ -25,4 +25,3 @@ def delete_promotion(item_id)
 	Product.update(item_id,:promoted=>'false')
 	puts 'Suceess remove the promotion from this product!'
 end
-
