@@ -68,7 +68,10 @@ class POSApplication < Sinatra::Base
        load_products
         
     end
-
+    
+    post '/items' do 
+        add_into_cart(params[:name],params[:price],params[:unit],params[:num])
+    end
 
     get '/products/:id' do
         begin

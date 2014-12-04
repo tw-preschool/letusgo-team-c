@@ -6,6 +6,10 @@ def load_products
     erb :items
 end
 
+def add_into_cart(name,price,unit,num)
+    puts name,price,unit,num
+end
+
 def show_shoppingcart
 	#products = Product.all || []
     #        products.to_json
