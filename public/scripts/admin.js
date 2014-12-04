@@ -88,11 +88,12 @@ $(document).ready(function() {
 
 	function showAddProductLine(name, price, unit,promoted) {
 		var check = promoted == "true" ? "checked" : "unchecked";
-		var manage = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>' +
-            '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>' +
-            '<label class="pull-right"><input type="checkbox" id="promoted" '+ ' ' + check +'>买二送一</label>';
-		var listItem = $("<tr><td>" + name + "</td><td>" + price 
-			+ "</td><td>" + unit + "</td><td>" + manage + "</td></tr>");
+        var editLink = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>';
+        var deleteLink = '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>';
+        var chechBoxLink = '<label class="pull-right"><input type="checkbox" id="promoted" '+ ' ' + check +'>买二送一</label>';
+		var listItem = $('<tr><td class="product-name">' + name + '</td><td class="product-price">' + price 
+			+ '</td><td class="product-unit">' + unit + "</td><td>" + editLink + deleteLink + chechBoxLink + 
+			"</td></tr>");
 		$('#item-table').find('tbody').append(listItem);
 
 		listItem.find('.delete-product').on('click', function(event) {
@@ -109,7 +110,7 @@ $(document).ready(function() {
 
 		listItem.find('.edit-product').on('click', function(event) {
 			event.preventDefault();
-			openEditLayer();
+			openEditLayer(name, price, unit, listItem);
 		});
 	}
 
