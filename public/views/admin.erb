@@ -39,7 +39,7 @@
         </thead>
         <tbody>
           <% @products.each do |product| %>
-          <tr>
+          <tr id=<%= product.id %>>
             <td><%= product.name %></td>
             <td><%= product.price %></td>
             <td><%= product.unit %></td>
@@ -50,7 +50,7 @@
               <span class="glyphicon glyphicon-plus"></span></a>
               <a href="#" class="delete-product">
               <span class="glyphicon glyphicon-remove"></span></a>
-              <label class="pull-right"><input type="checkbox">买二送一</label>
+              <label class="pull-right"><input type="checkbox" name="promotion">买二送一</label>
             </td>
           </tr>
           <% end %>
