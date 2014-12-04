@@ -5,9 +5,13 @@ require 'json'
 
 require './models/product'
 
+
+
 class POSApplication < Sinatra::Base
     set :views, settings.root + '/public/views'
     dbconfig = YAML.load(File.open("config/database.yml").read)
+
+
 
     configure :development do
         require 'sqlite3'
@@ -19,26 +23,34 @@ class POSApplication < Sinatra::Base
         ActiveRecord::Base.establish_connection(dbconfig['test'])
     end
 
-    use Rack::PostBodyContentTypeParser
 
+    use Rack::Session::Pool, :expire_after => 1200
+    configure do
+      enable :sessions
+      set :username, 'admin'
+      set :password, 'admin'
+    end
+
+    post '/login' do
+      if params[:name] == settings.username && params[:password] == settings.password
+         session[:admin] = true
+         return session[:admin].to_json
+      else
+        session[:admin] = false
+        return session[:admin].to_json
+      end
+    end
+
+    get '/judgeLogin' do
+       return session[:admin].to_json
+    end
+
+
+    use Rack::PostBodyContentTypeParser
     get '/' do
         content_type :html
         File.open('public/index.html').read
     end
-
-
-    post '/login' do
-        if  params[:name] == "admin" && params[:password] == "admin"
-            session['userName'] = params[:name]
-           do
-             redirect '/'
-           end
-        else
-           redirect '/login'
-        end
-    end
-
-
     get '/delete' do
         begin
             product = Product.where(:name => params['name'])[0]
@@ -88,6 +100,10 @@ class POSApplication < Sinatra::Base
         @products = Product.all
         erb :admin
     end
+
+
+
+
 
     after do
         ActiveRecord::Base.connection.close
