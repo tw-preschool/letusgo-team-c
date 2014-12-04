@@ -66,7 +66,6 @@ $(document).ready(function() {
 		$('.overlay').find('#submit').text('添加');
 		$('.overlay').fadeIn();
 		$('#product-form')[0].reset();	
-		console.log(promoted);
 		$('.overlay').find('#submit').off();
 		$('.overlay').find('#submit').on('click', function(event){
 			event.preventDefault();
@@ -74,13 +73,13 @@ $(document).ready(function() {
 			var name = $('#name').val();
 			var price = $('#price').val();
 			var unit = $('#unit').val();
-			var promoted = $("input[id='promoted']").is(':checked') ? "true" : "false";		
+			var promoted = "false";		
 			$.ajax('/add', {
 				success: function(response) {
 					console.log('ok');
 				},
 				type: 'post',
-				data: {"name": name, "price": price, "unit": unit, "promoted":promoted },
+				data: {"name": name, "price": price, "unit": unit, "promoted": promoted },
 				complete: showAddProductLine(name, price, unit, promoted)
 			});		
 		});	
