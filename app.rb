@@ -72,7 +72,7 @@ class POSApplication < Sinatra::Base
         puts params[:promoted]
 
         if product.save
-            [201, {:message => "products/#{product.id}"}.to_json]
+            [201, {:message => "products/#{product.id}", :productId => product.id}.to_json]
         else
             halt 500, {:message => "create product failed"}.to_json
         end
@@ -148,9 +148,6 @@ class POSApplication < Sinatra::Base
         delete_promotion(params[:item_id])
     end
 
-    get '/test' do
-
-    end
 
     after do
         ActiveRecord::Base.connection.close
