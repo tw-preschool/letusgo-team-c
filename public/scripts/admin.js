@@ -17,14 +17,9 @@ $(document).ready(function() {
 		event.preventDefault();
 		var name = $(this).closest('tr').find('td').first().text();
 		$(this).closest('tr').remove();
-		$.ajax('/delete', {
-			success: function(response) {
-				console.log('ok');
-			},
-			data: {"name": name}
-		});
+		deleteProductByName(name);
 	});
-
+	
 	$('.overlay').find('#cancel').on('click', function(event) {
 		event.preventDefault();
 		$('.overlay').fadeOut();
@@ -105,12 +100,7 @@ $(document).ready(function() {
 			event.preventDefault();
 			var productName = $(this).closest('tr').find('td').first().text();
 			$(this).closest('tr').remove();
-			$.ajax('/delete', {
-				success: function(response) {
-					console.log('ok');
-				},
-				data: {"name": productName}
-			});
+			deleteProductByName(productName);
 		});
 
 		listItem.find('.edit-product').on('click', function(event) {
@@ -145,5 +135,14 @@ $(document).ready(function() {
 				}
 			}
 		});	
+	}
+
+	function deleteProductByName(productName) {
+		$.ajax('/delete', {
+			success: function(response) {
+				console.log('delete a product ok');
+			},
+			data: {"name": productName}
+		});
 	}
 });
