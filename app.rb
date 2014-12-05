@@ -30,7 +30,7 @@ class LoginScreen < Sinatra::Base
 
   get '/judgelogin' do
   redirect '/login' unless session[:admin]
-  return true.to_json
+  redirect '/admin'
   end
 end
 
