@@ -29,6 +29,18 @@ $(document).ready(function () {
         this.value = this.value.replace(/[^\d]/g, '');
     });
 
+    $("[name='remove']").click(function(){
+        $(this).closest('tr').remove();
+        var id = parseInt($(this).attr("key"));
+        $.ajax('/deleteCartItem', {
+                success: function(response) {
+                    console.log('ok');
+                },
+                type: 'post',
+                data: {"id": id}
+            });
+    });
+
     function calculate(e){
         var subTotal;
         $td =$(this).parent();
@@ -48,7 +60,7 @@ $(document).ready(function () {
 
         if(checked){
             $td.parent().find("[name='subTotal']").text(subTotal);
-            $td.parent().siblings("tr:last").find("[name='total']").text(parseInt(total)+subTotal);
+            $td.parent().siblings("tr:last").find("[name='total']").text(+parseInt(total)+subTotal);
         }else{
             $td.parent().siblings("tr:last").find("[name='total']").text(parseInt(total)-subTotal);
         }

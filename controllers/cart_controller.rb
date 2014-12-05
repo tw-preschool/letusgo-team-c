@@ -41,6 +41,11 @@ def show_shoppingcart
   erb :cart
 end
 
+def delete_shoppingcart(id)
+    Item.where(:id => id).first.destroy     
+end
+
+
 def add_promotion(item_id)
 	Product.update(item_id.to_i,:promoted=>'true')
 end

@@ -59,17 +59,21 @@
                 <td><%= item.unit%></td>
                 <td>
                   <div class="input-group col-lg-6">
-                      <span class="input-group-btn"><button name="subtract" class="btn btn-default" type="button">-</button></span>
-                      <input class="form-control" name="number" type="text" value=<%= item.num%>>
-                      <span class="input-group-btn"><button name="plus" class="btn btn-default" type="button">+</button></span>
+                      <span class="input-group-btn"><button name="subtract" class="btn btn-default numcolor" type="button">-</button></span>
+                      <input class="form-control numlcation" name="number" type="text" value=<%= item.num%>>
+                      <span class="input-group-btn"><button name="plus" class="btn btn-default numcolor" type="button">+</button></span>
                   </div>       
                 </td>
-                <td class="money" name="subTotal"><%= item.price * item.num%>
+                <td class="money">
+                    <p name="subTotal" style="display:inline-block"><%= item.price * item.num%></p>
+                    <a name="remove" key=<%= item.id %> class="trash" href="#">
+                      <span class="glyphicon glyphicon-trash"></span>
+                    </a>
                 </td>
             </tr>
           <% end %>
           <tr>
-            <td colspan="5" style="text-align:right"><p>总计：<span class="money" name="total">¥0.00</span>元</p>
+            <td colspan="5" style="text-align:right"><p>总计：<span class="money" name="total">0.00</span>元</p>
               <a href="./payment.html" class="btn btn-primary btn-small" role="button">付款</a></td>
           </tr>
           </tbody>
