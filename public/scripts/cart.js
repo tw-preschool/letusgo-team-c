@@ -40,8 +40,10 @@ $(document).ready(function () {
         
         if(promoted == "true" && num > 2){
             subTotal = parseInt(price) * (parseInt(num) - 1);
+            $td.find(".show_promotion").show();
         }else{
             subTotal = parseInt(price) * parseInt(num);
+            $td.find(".show_promotion").hide();
         }
 
         if(checked){

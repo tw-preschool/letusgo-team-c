@@ -1,0 +1,42 @@
+
+.money{
+	color: #f40;
+	font-weight: 700;
+	font-size: 22px;
+	font-family: tohama, arial;
+}
+.promotion{
+	background: url("btn-21.png") repeat scroll 0 0 transparent;
+	color: #FFFFFF;
+	height: 21px;
+	line-height: 21px;
+	text-align: center;
+	width: 67px;
+	text-decoration: none;
+	
+}
+.show_promotion{
+	float: right;
+	display: none;
+}
+.table-bordered>tbody>tr{
+	height: 100px;
+	width: 
+}
+.table-bordered>tbody>tr>td{
+	border-left: none;
+	border-right: none;
+	padding-top: 40px;
+	font-weight: 700;
+	font-size: 15px;
+	font-family: tohama, arial;
+
+}
+.table-bordered>thead>tr>th{
+
+	border-left: none;
+	border-right: none;
+}
+.c1{
+	width: 50%;
+}

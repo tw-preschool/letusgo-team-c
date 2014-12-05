@@ -3,8 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>Pos Web</title>
+  
+  
   <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../styles/cart.css"/>
   <link rel="stylesheet" href="../styles/main.css"/>
+  
 </head>
 
 <body>
@@ -34,10 +38,10 @@
         <thead>
           <tr>
             <th class="active" colspan="5"><h4>
-            <input type="checkbox" class="all" style="margin-right:5px">购物清单</h4></th>
+              <input type="checkbox" class="all" style="margin-right:5px">购物清单</h4></th>
           </tr>
           <tr>
-            <th style="padding-left:40px" >名称</th>
+            <th style="padding-left:24px" >名称</th>
             <th>单价(元)</th>
             <th>单位</th>
             <th>数量</th>
@@ -47,8 +51,11 @@
         <tbody>
           <% @items.each do |item| %>
             <tr id=<%= item.id %> promoted=<%= item.promoted%>>
-                <td><input type="checkbox" class="sub" style="margin-right:22px"><%= item.name%></td>
-                <td><%= item.price%></td>
+                <td>
+                  <input type="checkbox" class="sub" style="margin-right:4px"><%= item.name%>
+                  <div class="show_promotion"><a class="promotion">亲，买二送一啦^.^~</a></div>
+                </td>
+                <td class="money"><%= item.price%></td>
                 <td><%= item.unit%></td>
                 <td>
                   <div class="input-group col-lg-6">
@@ -57,11 +64,12 @@
                       <span class="input-group-btn"><button name="plus" class="btn btn-default" type="button">+</button></span>
                   </div>       
                 </td>
-                <td name="subTotal">3</td>
+                <td class="money" name="subTotal"><%= item.price * item.num%>
+                </td>
             </tr>
           <% end %>
           <tr>
-            <td colspan="5" style="text-align:right"><p>总计：<span name="total">6.00元</span></p>
+            <td colspan="5" style="text-align:right"><p>总计：<span class="money" name="total">¥0.00</span>元</p>
               <a href="./payment.html" class="btn btn-primary btn-small" role="button">付款</a></td>
           </tr>
           </tbody>
