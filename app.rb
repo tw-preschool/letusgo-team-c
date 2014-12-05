@@ -122,9 +122,10 @@ class POSApplication < Sinatra::Base
     end
 
     get '/admin' do
+        redirect '/login' unless session[:admin] 
         products = Product.all
         @products = products
-        @count = products.length
+        @count = get_shoppingcart_num
         erb :admin
     end
 
