@@ -46,18 +46,16 @@
         </thead>
         <tbody>
           <% @items.each do |item| %>
-            <tr id=<%= item.id %>>
+            <tr id=<%= item.id %> promoted=<%= item.promoted%>>
                 <td><input type="checkbox" class="sub" style="margin-right:22px"><%= item.name%></td>
                 <td><%= item.price%></td>
                 <td><%= item.unit%></td>
                 <td>
-                  <form class="form-inline" role="form">
-                    <div class="input-group col-lg-6">
-                      <span class="input-group-btn"><button class="btn btn-default" type="button">-</button></span>
-                      <input class="form-control" id="number" type="text" placeholder="1">
-                      <span class="input-group-btn"><button class="btn btn-default" type="button">+</button></span>
-                    </div>
-                  </form>
+                  <div class="input-group col-lg-6">
+                      <span class="input-group-btn"><button name="subtract" class="btn btn-default" type="button">-</button></span>
+                      <input class="form-control" name="number" type="text" value=<%= item.num%>>
+                      <span class="input-group-btn"><button name="plus" class="btn btn-default" type="button">+</button></span>
+                  </div>       
                 </td>
             <td>3</td>
             </tr>

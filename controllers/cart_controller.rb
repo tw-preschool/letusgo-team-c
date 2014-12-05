@@ -26,7 +26,19 @@ def add_into_cart(id,name,price,unit)
 end
 
 def show_shoppingcart
-	@items = Item.all || []
+	products = Product.all || []
+	items = Item.all || []
+
+	items.each do |item|
+		products.each do |product|
+			if item.name == product.name
+			   item.promoted = product.promoted
+			   next
+			end
+		end
+	end
+	
+	@items = items;
     erb :cart
 end
 
