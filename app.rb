@@ -98,13 +98,7 @@ class POSApplication < Sinatra::Base
     end
 
     post '/items' do
-        add_into_cart(params[:name],params[:price],params[:unit])
-        item = Item.create(:name => params[:name],
-                            :price => params[:price],
-                            :unit => params[:unit]
-                             )
-        puts item.num
-
+        add_into_cart(params[:id],params[:name],params[:price],params[:unit])
     end
 
     get '/products/:id' do
