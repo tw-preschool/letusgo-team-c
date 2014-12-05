@@ -1,4 +1,10 @@
 
+.back{
+	background: #ccc;
+}
+body{
+	background-color: #222;
+}
 .money{
 	color: #f40;
 	font-weight: 700;
@@ -32,7 +38,6 @@
 }
 .table-bordered>tbody>tr{
 	height: 100px;
-	width: 
 }
 .table-bordered>tbody>tr>td{
 	border-left: none;
@@ -42,6 +47,13 @@
 	font-size: 15px;
 	font-family: tohama, arial;
 
+}
+
+.table-clo{
+	color: #FFFFFF;
+	background-color: #f40;
+	font-weight: 700;
+	font-family: tohama, arial;
 }
 .table-bordered>thead>tr>th{
 
