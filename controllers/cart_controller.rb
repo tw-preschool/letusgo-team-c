@@ -11,7 +11,6 @@ def add_into_cart(id,name,price,unit)
         #item = Item.find(:first, :conditions => [ "name = ?", params[:name]])  
         item = Item.where(:name => params['name']).first
         if  item == nil
-            puts "can not be founded!"
             item = Item.create(:name => params[:name],
                        :price => params[:price],
                        :unit => params[:unit],
@@ -20,7 +19,6 @@ def add_into_cart(id,name,price,unit)
         else 
             item.num += 1;
             item.save
-            puts item.num
         end
         item.save
 end
@@ -37,7 +35,7 @@ def show_shoppingcart
 			end
 		end
 	end
-	
+
 	@items = items;
     erb :cart
 end
