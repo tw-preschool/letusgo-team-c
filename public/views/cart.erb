@@ -33,10 +33,11 @@
       <table class="table table-bordered"  style="table-layout:fixed">
         <thead>
           <tr>
-            <th class="active" colspan="5"><h4>购物清单</h4></th>
+            <th class="active" colspan="5"><h4>
+            <input type="checkbox" class="all" style="margin-right:5px">购物清单</h4></th>
           </tr>
           <tr>
-            <th>名称</th>
+            <th style="padding-left:40px" >名称</th>
             <th>单价(元)</th>
             <th>单位</th>
             <th>数量</th>
@@ -46,7 +47,7 @@
         <tbody>
           <% @items.each do |item| %>
             <tr id=<%= item.id %>>
-                <td><%= item.name%></td>
+                <td><input type="checkbox" class="sub" style="margin-right:22px"><%= item.name%></td>
                 <td><%= item.price%></td>
                 <td><%= item.unit%></td>
                 <td>
@@ -77,6 +78,7 @@
     <script type="text/javascript" src="../scripts/model/promotion.js"></script>
     <script type="text/javascript" src="../scripts/utils.js"></script>
     <script type="text/javascript" src="../scripts/main.js"></script>
+    <script type="text/javascript" src="../scripts/cart.js"></script>
 
   </body>
   </html>
