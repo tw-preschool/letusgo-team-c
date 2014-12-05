@@ -4,6 +4,7 @@ require 'rack/contrib'
 require 'active_record'
 require 'json'
 require './models/product'
+require './models/item'
 require './controllers/cart_controller'
 class LoginScreen < Sinatra::Base
 
@@ -72,7 +73,7 @@ class POSApplication < Sinatra::Base
         puts params[:promoted]
 
         if product.save
-            [201, {:message => "products/#{product.id}"}.to_json]
+            [201, {:message => "products/#{product.id}", :productId => product.id}.to_json]
         else
             halt 500, {:message => "create product failed"}.to_json
         end
@@ -93,12 +94,18 @@ class POSApplication < Sinatra::Base
         end
     end
 
-    get '/items' do
+    get '/views/items' do
        load_products
     end
 
     post '/items' do
-        add_into_cart(params[:name],params[:price],params[:unit],params[:num])
+        add_into_cart(params[:name],params[:price],params[:unit])
+        item = Item.create(:name => params[:name],
+                            :price => params[:price],
+                            :unit => params[:unit]
+                             )
+        puts item.num
+
     end
 
     get '/products/:id' do
@@ -140,6 +147,8 @@ class POSApplication < Sinatra::Base
     post '/deletePromotion' do
         delete_promotion(params[:item_id])
     end
+
+
     after do
         ActiveRecord::Base.connection.close
     end
