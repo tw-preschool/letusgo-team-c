@@ -19,10 +19,11 @@ $(document).ready(function() {
 		$(this).closest('tr').remove();
 		deleteProductByName(name);
 	});
-	
+
 	$('.overlay').find('#cancel').on('click', function(event) {
 		event.preventDefault();
 		$('.overlay').fadeOut();
+
 	});
 
 	$("input[name='promotion']").click(function() {
@@ -33,11 +34,11 @@ $(document).ready(function() {
 
 	function openEditLayer(name, price, unit, listItem) {
 		$('.overlay').find('#submit').text('更新');
-		$('#product-form')[0].reset();	
+		$('#product-form')[0].reset();
 		$('.overlay').find('#name').val(name);
 		$('.overlay').find('#price').val(price);
 		$('.overlay').find('#unit').val(unit);
-		$('.overlay').fadeIn();	
+		$('.overlay').fadeIn();
 
 		$('.overlay').find('#submit').off();
 		$('.overlay').find('#submit').on('click', function(event){
@@ -46,7 +47,7 @@ $(document).ready(function() {
 			var newName = $('#name').val();
 			var newPrice = $('#price').val();
 			var newUnit = $('#unit').val();
-			
+
 			$.ajax('/edit', {
 				success: function(response) {
 					console.log('ok');
@@ -59,24 +60,26 @@ $(document).ready(function() {
 					listItem.find('.product-unit').text(newUnit);
 				}
 			});
-			
-		});		
+
+		});
 	}
 
 	function openAddLayer() {
 		$('.overlay').find('#submit').text('添加');
 		$('.overlay').fadeIn();
-		$('#product-form')[0].reset();	
+
+		$('#product-form')[0].reset();
 		$('.overlay').find('#submit').off();
 		$('.overlay').find('#submit').on('click', function(event){
 			event.preventDefault();
 			$('.overlay').fadeOut();
-			addProduct($('#name').val(), $('#price').val(), $('#unit').val(), "false");			
-		});	
+			addProduct($('#name').val(), $('#price').val(), $('#unit').val(), "false");
+		});
 	}
-	
+
 	function showAddProductLine(name, price, unit, promoted, productId) {
 		var listItem = generateNewProductItem(name, price, unit, promoted, productId);
+
 		$('#item-table').find('tbody').append(listItem);
 
 		listItem.find('.delete-product').on('click', function(event) {
@@ -117,7 +120,7 @@ $(document).ready(function() {
 					alert('Suceess remove the promotion on this product!');
 				}
 			}
-		});	
+		});
 	}
 
 	function addProduct(name, price, unit, promoted) {
@@ -129,6 +132,7 @@ $(document).ready(function() {
 			dataType: 'json',
 			data: {"name": name, "price": price, "unit": unit, "promoted": promoted },
 		});
+
 	}
 
 	function deleteProductByName(productName) {
@@ -145,8 +149,8 @@ $(document).ready(function() {
 		var editLink = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>';
 		var deleteLink = '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>';
 		var checkBoxLink = '<label class="pull-right"><input type="checkbox" name="promotion" '+ ' ' + check +'>买二送一</label>';
-		var listItem = $('<tr id=' + productId + '><td class="product-name">' + name + '</td><td class="product-price">' + price 
-			+ '</td><td class="product-unit">' + unit + "</td><td>" + editLink + deleteLink + checkBoxLink + 
+		var listItem = $('<tr id=' + productId + '><td class="product-name">' + name + '</td><td class="product-price">' + price
+			+ '</td><td class="product-unit">' + unit + "</td><td>" + editLink + deleteLink + checkBoxLink +
 			"</td></tr>");
 		return listItem;
 	}

@@ -1,5 +1,6 @@
 $(document).ready(function(){
 
+
   $('button').on("click",function(event){
     event.preventDefault();
     var name = $('#username').val();
