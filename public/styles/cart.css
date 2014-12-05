@@ -15,6 +15,17 @@
 	text-decoration: none;
 	
 }
+.numcolor{
+	background-color: #f40;
+	color: #FFFFFF;
+	font-weight: 700;
+}
+.numlcation{
+	text-align: center;
+	background-color: #585858;
+	font-weight: 700;
+	color: #FFFFFF;
+}
 .show_promotion{
 	float: right;
 	display: none;
@@ -37,6 +48,9 @@
 	border-left: none;
 	border-right: none;
 }
-.c1{
-	width: 50%;
+.trash{
+	float:right;
+	margin-right:30px;
+	color: red;
+    font-size: 22px;
 }

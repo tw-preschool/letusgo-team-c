@@ -133,6 +133,10 @@ class POSApplication < Sinatra::Base
         show_shoppingcart
     end
 
+    post '/deleteCartItem' do
+        delete_shoppingcart(params[:id])
+    end
+
     post '/addPromotion' do
         puts params[:item_name]
         add_promotion(params[:item_id])
