@@ -1,5 +1,5 @@
+require 'rubygems'
 require 'sinatra'
-require 'sinatra/base'
 require 'rack/contrib'
 require 'active_record'
 require 'json'
@@ -7,17 +7,16 @@ require './models/product'
 require './models/item'
 require './controllers/cart_controller'
 class LoginScreen < Sinatra::Base
-
+  use Rack::Session::Pool, :expire_after => 60*60*24*7
   configure do
-    use Rack::Session::Pool, :expire_after => 2592000
     set :username, 'admin'
     set :password, 'admin'
   end
 
   post '/login' do
     if params[:name] == settings.username && params[:password] == settings.password
-      session[:admin] = true
-      return session[:admin].to_json
+       session[:admin] = true
+       return session[:admin].to_json
     else
       session[:admin] = false
       return session[:admin].to_json
@@ -30,8 +29,8 @@ class LoginScreen < Sinatra::Base
   end
 
   get '/judgelogin' do
-    redirect '/login' unless session[:admin]
-    redirect '/'
+  redirect '/login' unless session[:admin]
+  return true.to_json
   end
 end
 
