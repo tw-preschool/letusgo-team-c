@@ -124,7 +124,7 @@ class POSApplication < Sinatra::Base
     get '/admin' do
         products = Product.all
         @products = products
-        @count = products.length
+        @count = get_shoppingcart_num
         erb :admin
     end
 

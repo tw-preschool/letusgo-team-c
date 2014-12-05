@@ -3,7 +3,7 @@ require 'active_record'
 def load_products
     products = Product.all
     @products = products
-    @count = products.length
+    @count = get_shoppingcart_num
     erb :items
 end
 
@@ -37,7 +37,8 @@ def show_shoppingcart
 	end
 
 	@items = items;
-    erb :cart
+  @count = items.length
+  erb :cart
 end
 
 def add_promotion(item_id)
@@ -47,4 +48,8 @@ end
 def delete_promotion(item_id)
 	Product.update(item_id,:promoted=>'false')
 	puts 'Suceess remove the promotion from this product!'
+end
+
+def get_shoppingcart_num
+    return Item.all.length
 end
