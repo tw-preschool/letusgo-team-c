@@ -1,4 +1,4 @@
-/*$(document).ready(function () {
+$(document).ready(function () {
   var feature = (function () {
     var initItems = function () {
       if($('#item-table').length) {
@@ -42,4 +42,3 @@
   feature.init();
   feature.printDate();
 });
-*/

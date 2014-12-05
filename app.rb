@@ -1,16 +1,43 @@
 require 'sinatra'
+require 'sinatra/base'
 require 'rack/contrib'
 require 'active_record'
 require 'json'
-
 require './models/product'
 require './controllers/cart_controller'
+class LoginScreen < Sinatra::Base
+
+  configure do
+    use Rack::Session::Pool, :expire_after => 2592000
+    set :username, 'admin'
+    set :password, 'admin'
+  end
+
+  post '/login' do
+    if params[:name] == settings.username && params[:password] == settings.password
+      session[:admin] = true
+      return session[:admin].to_json
+    else
+      session[:admin] = false
+      return session[:admin].to_json
+    end
+  end
+
+  get '/login' do
+    content_type :html
+    File.open('public/views/login.html').read
+  end
+
+  get '/judgelogin' do
+    redirect '/login' unless session[:admin]
+    redirect '/'
+  end
+end
 
 class POSApplication < Sinatra::Base
+  use LoginScreen
     set :views, settings.root + '/public/views'
     dbconfig = YAML.load(File.open("config/database.yml").read)
-
-
 
     configure :development do
         require 'sqlite3'
@@ -20,34 +47,6 @@ class POSApplication < Sinatra::Base
     configure :test do
         require 'sqlite3'
         ActiveRecord::Base.establish_connection(dbconfig['test'])
-    end
-
-
-    use Rack::Session::Pool, :expire_after => 2592000
-    configure do
-      enable :sessions
-      set :username, 'admin'
-      set :password, 'admin'
-    end
-
-
-    post '/login' do
-      if params[:name] == settings.username && params[:password] == settings.password
-         session[:admin] = true
-         return session[:admin].to_json
-      else
-        session[:admin] = false
-        return session[:admin].to_json
-      end
-    end
-
-    get '/login' do
-      content_type :html
-      File.open('public/views/login.html').read
-    end
-
-    get '/judgelogin' do
-        return session[:admin].to_json
     end
 
 
@@ -96,7 +95,6 @@ class POSApplication < Sinatra::Base
 
     get '/items' do
        load_products
-
     end
 
     post '/items' do

@@ -55,7 +55,7 @@ $(document).ready(function() {
 
 				}
 			});
-		}		
+		}
 	});
 
 	$('.overlay').find('#cancel').on('click', function(event) {
@@ -65,11 +65,11 @@ $(document).ready(function() {
 
 	function openEditLayer(name, price, unit, listItem) {
 		$('.overlay').find('#submit').text('更新');
-		$('#product-form')[0].reset();	
+		$('#product-form')[0].reset();
 		$('.overlay').find('#name').val(name);
 		$('.overlay').find('#price').val(price);
 		$('.overlay').find('#unit').val(unit);
-		$('.overlay').fadeIn();	
+		$('.overlay').fadeIn();
 
 		$('.overlay').find('#submit').off();
 		$('.overlay').find('#submit').on('click', function(event){
@@ -78,7 +78,7 @@ $(document).ready(function() {
 			var newName = $('#name').val();
 			var newPrice = $('#price').val();
 			var newUnit = $('#unit').val();
-			
+
 			$.ajax('/edit', {
 				success: function(response) {
 					console.log('ok');
@@ -91,14 +91,14 @@ $(document).ready(function() {
 					listItem.find('.product-unit').text(newUnit);
 				}
 			});
-			
-		});		
+
+		});
 	}
 
 	function openAddLayer() {
 		$('.overlay').find('#submit').text('添加');
 		$('.overlay').fadeIn();
-		$('#product-form')[0].reset();	
+		$('#product-form')[0].reset();
 	}
 
 	function showAddProductLine(name, price, unit,promoted) {
@@ -106,7 +106,7 @@ $(document).ready(function() {
 		var manage = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>' +
             '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>' +
             '<label class="pull-right"><input type="checkbox" id="promoted" '+ ' ' + check +'>买二送一</label>';
-		var listItem = $("<tr><td>" + name + "</td><td>" + price 
+		var listItem = $("<tr><td>" + name + "</td><td>" + price
 			+ "</td><td>" + unit + "</td><td>" + manage + "</td></tr>");
 		$('#item-table').find('tbody').append(listItem);
 
@@ -145,6 +145,6 @@ $(document).ready(function() {
 				alert('Suceess add the promotion on this product!');
 			}
 		});
-		
+
 	});
 });
