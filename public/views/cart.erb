@@ -53,7 +53,9 @@
             <tr id=<%= item.id %> promoted=<%= item.promoted%>>
                 <td>
                   <input type="checkbox" class="sub" style="margin-right:4px"><%= item.name%>
-                  <div class="show_promotion"><a class="promotion">亲，买二送一啦^.^~</a></div>
+                  <div style="display: <%= (item.promoted=="true" && item.num > 2) ? "block" : "none" %>;" class="show_promotion">
+                    <a class="promotion">亲，买二送一啦~</a>
+                  </div>
                 </td>
                 <td class="money"><%= item.price%></td>
                 <td><%= item.unit%></td>
