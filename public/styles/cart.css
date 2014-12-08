@@ -3,10 +3,11 @@
 	background: #ccc;
 }
 body{
-	background-color: #222;
+	/* background-color: #222; */
+	color: #585858;
 }
 .money{
-	color: #f40;
+	/* color: #585858; */
 	font-weight: 700;
 	font-size: 22px;
 	font-family: tohama, arial;
@@ -22,7 +23,7 @@ body{
 	
 }
 .numcolor{
-	background-color: #f40;
+	background-color: #585858;
 	color: #FFFFFF;
 	font-weight: 700;
 }
@@ -44,14 +45,14 @@ body{
 	border-right: none;
 	padding-top: 40px;
 	font-weight: 700;
-	font-size: 15px;
+	font-size: 17px;
 	font-family: tohama, arial;
 
 }
 
 .table-clo{
 	color: #FFFFFF;
-	background-color: #f40;
+	background-color: #585858;
 	font-weight: 700;
 	font-family: tohama, arial;
 }
@@ -62,7 +63,7 @@ body{
 }
 .trash{
 	float:right;
-	margin-right:30px;
-	color: red;
+	margin-right:50px;
+	color: #585858;
     font-size: 22px;
 }
