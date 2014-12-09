@@ -68,6 +68,7 @@ class POSApplication < Sinatra::Base
         product = Product.new(:name => params[:name],
             :price => params[:price],
             :unit => params[:unit],
+            :number => params[:number],
             :promoted => params[:promoted])
         puts params[:promoted]
 
@@ -83,7 +84,8 @@ class POSApplication < Sinatra::Base
         product.attributes = {
            :name => params[:newName],
            :price => params[:price],
-           :unit => params[:unit]
+           :unit => params[:unit],
+           :number => params[:number]
         }
 
         if product.save
@@ -122,7 +124,7 @@ class POSApplication < Sinatra::Base
     end
 
     get '/admin' do
-        redirect '/login' unless session[:admin] 
+        redirect '/login' unless session[:admin]
         products = Product.all
         @products = products
         @count = get_shoppingcart_num

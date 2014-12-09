@@ -5,7 +5,8 @@ $(document).ready(function() {
 		var name = listItem.find('.product-name').text();
 		var price = listItem.find('.product-price').text();
 		var unit = listItem.find('.product-unit').text();
-		openEditLayer(name, price, unit, listItem);
+		var number = listItem.find('.product-number').text();
+		openEditLayer(name, price, unit, number, listItem);
 	});
 
 	$('.add-product').on('click', function(event) {
@@ -34,19 +35,20 @@ $(document).ready(function() {
 
 });
 
-function openEditLayer(name, price, unit, listItem) {
+function openEditLayer(name, price, unit, number, listItem) {
 	$('.overlay').find('#submit').text('更新');
 	$('#product-form')[0].reset();
 	$('.overlay').find('#name').val(name);
 	$('.overlay').find('#price').val(price);
 	$('.overlay').find('#unit').val(unit);
+	$('.overlay').find('#number').val(number);
 	$('.overlay').fadeIn();
 
 	$('.overlay').find('#submit').off();
 	$('.overlay').find('#submit').on('click', function(event){
 		event.preventDefault();
 		$('.overlay').fadeOut();
-		editProduct(name, $('#name').val(), $('#price').val(), $('#unit').val(), listItem);
+		editProduct(name, $('#name').val(), $('#price').val(), $('#unit').val(), $('#number').val(), listItem);
 	});
 }
 
@@ -59,12 +61,12 @@ function openAddLayer() {
 	$('.overlay').find('#submit').on('click', function(event){
 		event.preventDefault();
 		$('.overlay').fadeOut();
-		addProduct($('#name').val(), $('#price').val(), $('#unit').val(), "false");
+		addProduct($('#name').val(), $('#price').val(), $('#unit').val(), $('#number').val(), "false");
 	});
 }
 
-function showAddProductLine(name, price, unit, promoted, productId) {
-	var listItem = generateNewProductItem(name, price, unit, promoted, productId);
+function showAddProductLine(name, price, unit, number, promoted, productId) {
+	var listItem = generateNewProductItem(name, price, unit, number, promoted, productId);
 
 	$('#item-table').find('tbody').append(listItem);
 
@@ -77,7 +79,7 @@ function showAddProductLine(name, price, unit, promoted, productId) {
 
 	listItem.find('.edit-product').on('click', function(event) {
 		event.preventDefault();
-		openEditLayer(name, price, unit, listItem);
+		openEditLayer(name, price, unit, number, listItem);
 	});
 
 	listItem.find("input[name='promotion']").click(function() {
@@ -109,14 +111,14 @@ function changePromotionStatus(tr, check) {
 	});
 }
 
-function addProduct(name, price, unit, promoted) {
+function addProduct(name, price, unit, number, promoted) {
 	$.ajax('/add', {
 		success: function(response) {
-			showAddProductLine(name, price, unit, promoted, response.productId)
+			showAddProductLine(name, price, unit, number, promoted, response.productId)
 		},
 		type: 'post',
 		dataType: 'json',
-		data: {"name": name, "price": price, "unit": unit, "promoted": promoted },
+		data: {"name": name, "price": price, "unit": unit, "number": number, "promoted": promoted },
 	});
 
 }
@@ -130,29 +132,30 @@ function deleteProductByName(productName) {
 	});
 }
 
-function editProduct(name, newName, newPrice, newUnit, listItem) {
+function editProduct(name, newName, newPrice, newUnit, newNumber, listItem) {
 	console.log(newName);
 	$.ajax('/edit', {
 		success: function(response) {
 			listItem.find('.product-name').text(newName);
 			listItem.find('.product-price').text(newPrice);
 			listItem.find('.product-unit').text(newUnit);
+			listItem.find('.product-number').text(newNumber);
 		},
 		type: 'post',
-		data: {"name": name, "newName": newName, "price": newPrice, "unit": newUnit },
+		data: {"name": name, "newName": newName, "price": newPrice, "unit": newUnit, "number": newNumber },
 		complete: function() {
 
 		}
 	});
 }
 
-function generateNewProductItem(name, price, unit, promoted, productId) {
+function generateNewProductItem(name, price, unit, number, promoted, productId) {
 	var check = promoted == "true" ? "checked" : "unchecked";
 	var editLink = '<a href="#" class="edit-product"><span class="glyphicon glyphicon-edit"></span></a>';
 	var deleteLink = '<a href="#" class="delete-product"><span class="glyphicon glyphicon-remove"></span></a>';
 	var checkBoxLink = '<label class="pull-right"><input type="checkbox" name="promotion" '+ ' ' + check +'>买二送一</label>';
 	var listItem = $('<tr id=' + productId + '><td class="product-name">' + name + '</td><td class="product-price">' + price
-		+ '</td><td class="product-unit">' + unit + "</td><td>" + editLink + deleteLink + checkBoxLink +
-		"</td></tr>");
+		+ '</td><td class="product-unit">' + unit + '</td><td class="product-number">' + number + '</td><td>' + editLink + deleteLink + checkBoxLink +
+		'</td></tr>');
 	return listItem;
 }
