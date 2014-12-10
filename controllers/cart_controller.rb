@@ -1,15 +1,15 @@
 require 'active_record'
 
 def load_products
-    products = Product.all
+    #products = Product.all
+    products = Product.find(:all, :conditions=>"number>=1")
     @products = products
     @count = get_shoppingcart_num
     erb :items
-    #products = Product.find(:all,:number >= 1)
 end
 
 def add_into_cart(id,name,price,unit)
-        #item = Item.find(:first, :conditions => [ "name = ?", params[:name]])  
+        #item = Item.find(:first, :conditions => [ "name = ?", params[:name]])
         item = Item.where(:name => params['name']).first
         if  item == nil
             item = Item.create(:name => params[:name],
@@ -17,7 +17,7 @@ def add_into_cart(id,name,price,unit)
                        :unit => params[:unit],
                        :num => 1
                        )
-        else 
+        else
             item.num += 1;
         end
         item.save
@@ -43,7 +43,7 @@ end
 
 def delete_shoppingcart(id)
     item = Item.where(:id => id).first
-    item.destroy  unless item == nil 
+    item.destroy  unless item == nil
 end
 
 
