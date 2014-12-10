@@ -1,6 +1,6 @@
 require 'active_record'
 require 'logger'
-require 'yaml'
+require 'yaml'  
 
 desc "Migrate the database through scripts in db/."
 task :migrate => :environment do

@@ -100,6 +100,7 @@ class POSApplication < Sinatra::Base
     end
 
     post '/items' do
+        puts params[:id]
         add_into_cart(params[:id],params[:name],params[:price],params[:unit])
     end
 
@@ -124,7 +125,7 @@ class POSApplication < Sinatra::Base
     end
 
     get '/admin' do
-        redirect '/login' unless session[:admin]
+        #redirect '/login' unless session[:admin]
         products = Product.all
         @products = products
         @count = get_shoppingcart_num

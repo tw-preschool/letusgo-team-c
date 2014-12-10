@@ -18,8 +18,8 @@ def add_into_cart(id,name,price,unit)
                        )
         else 
             item.num += 1;
-            item.save
         end
+        puts items.name
         item.save
 end
 
