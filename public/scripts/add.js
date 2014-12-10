@@ -1,5 +1,6 @@
 $(document).ready(function(){
-	$('#submit').click(function(){
+	$('#submit').click(function(event){
+		event.preventDefault();
 		var name = $('#name').val();
 		var price = $('#price').val();
 		var unit = $('#unit').val();
