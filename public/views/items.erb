@@ -32,12 +32,13 @@
       <table id="item-table" class="table table-bordered" style="table-layout:fixed">
         <thead>
           <tr>
-            <th class="active" colspan="4" style="text-align:center"><h4>商品列表</h4></th>
+            <th class="active" colspan="5" style="text-align:center"><h4>商品列表</h4></th>
           </tr>
           <tr>
             <th>名称</th>
             <th>单价(元)</th>
             <th>单位</th>
+            <th>描述信息</th>
             <th></th>
           </tr>
         </thead>
@@ -47,6 +48,7 @@
                 <td><%= product.name %></td>
                 <td><%= product.price %></td>
                 <td><%= product.unit %></td>
+                <td><%= product.information %></td>
                 <td>
                     <button class="btn btn-primary btn-small" name="add">加入购物车</button>
                 </td>

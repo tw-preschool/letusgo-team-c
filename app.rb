@@ -69,6 +69,7 @@ class POSApplication < Sinatra::Base
             :price => params[:price],
             :unit => params[:unit],
             :number => params[:number],
+            :information => params[:information],
             :promoted => params[:promoted])
         puts params[:promoted]
 
@@ -85,7 +86,8 @@ class POSApplication < Sinatra::Base
            :name => params[:newName],
            :price => params[:price],
            :unit => params[:unit],
-           :number => params[:number]
+           :number => params[:number],
+           :information => params[:information]
         }
 
         if product.save
@@ -116,7 +118,8 @@ class POSApplication < Sinatra::Base
     post '/products' do
         product = Product.create(:name => params[:name],
             :price => params[:price],
-            :unit => params[:unit])
+            :unit => params[:unit],
+            :information => params[:information])
             if product.save
                 [201, {:message => "products/#{product.id}"}.to_json]
             else
