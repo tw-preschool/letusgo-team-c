@@ -23,9 +23,9 @@ class LoginScreen < Sinatra::Base
     end
   end
 
+  set :views, settings.root + '/public/views'
   get '/login' do
-    content_type :html
-    File.open('public/views/login.html').read
+    erb :login
   end
 
   get '/judgelogin' do
