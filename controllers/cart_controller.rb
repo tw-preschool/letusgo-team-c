@@ -5,6 +5,7 @@ def load_products
     @products = products
     @count = get_shoppingcart_num
     erb :items
+    #products = Product.find(:all,:number >= 1)
 end
 
 def add_into_cart(id,name,price,unit)
@@ -19,7 +20,6 @@ def add_into_cart(id,name,price,unit)
         else 
             item.num += 1;
         end
-        puts items.name
         item.save
 end
 
@@ -42,17 +42,25 @@ def show_shoppingcart
 end
 
 def delete_shoppingcart(id)
-    Item.where(:id => id).first.destroy     
+    item = Item.where(:id => id).first
+    item.destroy  unless item == nil 
 end
 
 
 def add_promotion(item_id)
-	Product.update(item_id.to_i,:promoted=>'true')
+  product = Product.where(:id => item_id).first
+  if product != nil
+    product.attributes = {:promoted => 'true'}
+    product.save
+  end
 end
 
 def delete_promotion(item_id)
-	Product.update(item_id,:promoted=>'false')
-	puts 'Suceess remove the promotion from this product!'
+	product = Product.where(:id => item_id).first
+  if product != nil
+    product.attributes = {:promoted => 'false'}
+    product.save
+  end
 end
 
 def get_shoppingcart_num

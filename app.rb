@@ -102,7 +102,6 @@ class POSApplication < Sinatra::Base
     end
 
     post '/items' do
-        puts params[:id]
         add_into_cart(params[:id],params[:name],params[:price],params[:unit])
     end
 
@@ -144,7 +143,6 @@ class POSApplication < Sinatra::Base
     end
 
     post '/addPromotion' do
-        puts params[:item_name]
         add_promotion(params[:item_id])
     end
 
