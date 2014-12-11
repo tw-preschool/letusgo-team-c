@@ -10,11 +10,21 @@ $(document).ready(function () {
     });
 
     $(".sub").bind("click",{flag:1},calculate);
+
     $("button[name='plus']").bind("click",{flag:1},calculateByPlusAndSub);
+
     $("button[name='subtract']").bind("click",{flag:0},calculateByPlusAndSub);
+    
     $("input[name='number']").keyup(function(){
         this.value = this.value.replace(/[^\d]/g, '1');
     });
+
+    $("input[name='number']").blur(function(){
+        if(this.value == ""){
+            this.value = "0";
+        }
+    });
+    
 
     $("[name='remove']").click(function(){
         $(this).closest('tr').remove();
@@ -50,7 +60,7 @@ $(document).ready(function () {
             $input.val(++val);
             money += parseInt(price);
         } else {
-            if (val > 1) {
+            if (val >= 1) {
                 $input.val(--val);
                 money -= parseInt(price);
             }
