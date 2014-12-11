@@ -66,3 +66,7 @@ end
 def get_shoppingcart_num
     return Item.all.length
 end
+
+def clear_shoppingcart
+    Item.delete_all('id >= 1')
+end

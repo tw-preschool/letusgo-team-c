@@ -150,6 +150,9 @@ class POSApplication < Sinatra::Base
         delete_promotion(params[:item_id])
     end
 
+    post '/close' do
+        clear_shoppingcart
+    end
 
     after do
         ActiveRecord::Base.connection.close
