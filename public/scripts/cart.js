@@ -1,4 +1,4 @@
-$(document).ready(function () {
+ $(document).ready(function () {
     $(".all").click(function(){
         var checked = this.checked;
         $(":checkbox").prop("checked",checked);
