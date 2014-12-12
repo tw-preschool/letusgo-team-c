@@ -15,13 +15,27 @@ $(document).ready(function () {
 
     $("button[name='subtract']").bind("click",{flag:0},calculateByPlusAndSub);
     
-    $("input[name='number']").keyup(function(){
-        this.value = this.value.replace(/[^\d]/g, '1');
+    var record;
+    var key;
+    $("input[name='number']").keydown(function(e){
+        record = this.value;
+        key = e.keyCode;
+        if(key == 8){
+            this.value = record;
+        }   
+    });
+
+    $("input[name='number']").keyup(function() {
+        if (key == 8) {
+            this.value = record;
+        } else {
+            this.value = this.value.replace(/[^\d]/g, record);
+        }
     });
 
     $("input[name='number']").blur(function(){
         if(this.value == ""){
-            this.value = "0";
+            this.value = record;
         }
     });
     
@@ -38,7 +52,21 @@ $(document).ready(function () {
             });
     });
 
+    function calculateByEdit(){
+        $td = $(this).closest("td").siblings("td:first");
+        var checked = $td.find(".sub").prop("checked");
+        var price = $td.next().text();
+       
+        var total = $td.parent().siblings("tr:last").find("[name='total']").text();
+        var money = parseInt(total);
+        if(checked){
+            var newMoney = parseInt(money)+
+            $td.parent().siblings("tr:last").find("[name='total']").text();
+        }
+    }
+
     function calculateByPlusAndSub(e){
+
         if (e.data.flag == 1) {
             $input = $(this).parent().prev();
         } else {
@@ -65,6 +93,7 @@ $(document).ready(function () {
                 money -= parseInt(price);
             }
         }
+
         if (promoted == "true" && val > 2) {
             subTotal = parseInt(price) * (val - 1);
             $td.find(".show_promotion").show();
@@ -73,18 +102,19 @@ $(document).ready(function () {
             $td.find(".show_promotion").hide();
         }
 
-        
-        if (checked) {
-            $td.parent().siblings("tr:last").find("[name='total']").text(money);
-        }
         $td.parent().find("[name='subTotal']").text(subTotal);
+        if (checked) {
+            $td.parent().siblings("tr:last").find("[name='total']").text("0");
+            $(".sub").each(calculate);
+        }
     }
 
     function calculate(){
-        $td =$(this).parent();
-        var subTotal =$td.parent().find("[name='subTotal']").text();
-        var totalNode=$td.parent().siblings("tr:last").find("[name='total']");
-        totalNode.text(parseInt(totalNode.text())+parseInt(subTotal));
+        $td = $(this).parent();
+        var subTotal = $td.parent().find("[name='subTotal']").text();
+        var totalNode = $td.parent().siblings("tr:last").find("[name='total']");
+        var newMoney = this.checked ? (parseInt(totalNode.text()) + parseInt(subTotal)) : (parseInt(totalNode.text()) - parseInt(subTotal));
+        totalNode.text(newMoney);
     }
     $(".all").click();
 });
