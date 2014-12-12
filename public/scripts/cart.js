@@ -78,29 +78,29 @@
         $td = $(this).closest("td").siblings("td:first");
 
         var checked = $td.find(".sub").prop("checked");
-        var subTotal;
+        var subTotal  = parseInt($td.parent().find("[name='subTotal']").text());
         var price = $td.next().text();
         var promoted = $td.parent().attr("promoted");
         var total = $td.parent().siblings("tr:last").find("[name='total']").text();
-        var money = parseInt(total);
+        var money = parseInt(total) - subTotal;
 
         if (e.data.flag == 1) {
             $input.val(++val);
-            money += parseInt(price);
         } else {
             if (val >= 1) {
                 $input.val(--val);
-                money -= parseInt(price);
             }
         }
 
         if (promoted == "true" && val > 2) {
-            subTotal = parseInt(price) * (val - 1);
+            subTotal = parseInt(price) * (val - Math.floor(val/3));
             $td.find(".show_promotion").show();
         } else {
             subTotal = parseInt(price) * val;
             $td.find(".show_promotion").hide();
         }
+
+        money += subTotal;
 
         $td.parent().find("[name='subTotal']").text(subTotal);
         if (checked) {

@@ -11,7 +11,7 @@ class Calculate
       price = item.get_price()
       if item.get_promoted()
         if num > 2
-          item.set_totalmoney(price * (num - 1))
+          item.set_totalmoney(price * (num - num/3))
           item.set_savingmoney(price)
         end
       elsif
