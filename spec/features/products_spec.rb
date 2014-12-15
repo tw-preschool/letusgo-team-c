@@ -3,12 +3,20 @@
 require_relative '../spec_helper'
 
 describe 'Products Application' do
+
   describe 'List all products' do
+<<<<<<< HEAD
     before { get '/products' }
 
+=======
+    #before { get '/views/items' }
+    
+>>>>>>> 0ee9d67fa77d35924b795ae9f41962b397115dd7
     it 'is successful' do
+      get '/views/items'
       expect(last_response.status).to eq 200
     end
+<<<<<<< HEAD
 
     it 'is empty at the very begining' do
       list = get '/products'
@@ -25,5 +33,7 @@ describe 'Products Application' do
 
   	end
 
+=======
+>>>>>>> 0ee9d67fa77d35924b795ae9f41962b397115dd7
   end
 end

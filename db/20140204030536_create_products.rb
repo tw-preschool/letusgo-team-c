@@ -5,6 +5,7 @@ class CreateProducts < ActiveRecord::Migration
             t.float :price
             t.string :unit
             t.integer :number
+            t.string :information
             t.string :promoted
             t.timestamps
         end

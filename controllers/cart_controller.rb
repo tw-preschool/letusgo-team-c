@@ -1,14 +1,15 @@
 require 'active_record'
 
 def load_products
-    products = Product.all
+    #products = Product.all
+    products = Product.find(:all, :conditions=>"number>=1")
     @products = products
     @count = get_shoppingcart_num
     erb :items
 end
 
 def add_into_cart(id,name,price,unit)
-        #item = Item.find(:first, :conditions => [ "name = ?", params[:name]])  
+        #item = Item.find(:first, :conditions => [ "name = ?", params[:name]])
         item = Item.where(:name => params['name']).first
         if  item == nil
             item = Item.create(:name => params[:name],
@@ -16,9 +17,8 @@ def add_into_cart(id,name,price,unit)
                        :unit => params[:unit],
                        :num => 1
                        )
-        else 
+        else
             item.num += 1;
-            item.save
         end
         item.save
 end
@@ -42,19 +42,31 @@ def show_shoppingcart
 end
 
 def delete_shoppingcart(id)
-    Item.where(:id => id).first.destroy     
+    item = Item.where(:id => id).first
+    item.destroy  unless item == nil
 end
 
 
 def add_promotion(item_id)
-	Product.update(item_id.to_i,:promoted=>'true')
+  product = Product.where(:id => item_id).first
+  if product != nil
+    product.attributes = {:promoted => 'true'}
+    product.save
+  end
 end
 
 def delete_promotion(item_id)
-	Product.update(item_id,:promoted=>'false')
-	puts 'Suceess remove the promotion from this product!'
+	product = Product.where(:id => item_id).first
+  if product != nil
+    product.attributes = {:promoted => 'false'}
+    product.save
+  end
 end
 
 def get_shoppingcart_num
     return Item.all.length
+end
+
+def clear_shoppingcart
+    Item.delete_all('id >= 1')
 end

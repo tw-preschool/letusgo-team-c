@@ -54,7 +54,7 @@
                 <td>
                   <input type="checkbox" class="sub" style="margin-right:4px"><%= item.name%>
                   <div style="display: <%= (item.promoted=="true" && item.num > 2) ? "block" : "none" %>;" class="show_promotion">
-                    <a class="promotion">亲，买二送一啦~</a>
+                    <a class="promotion">买二送一啦~</a>
                   </div>
                 </td>
                 <td class="money"><%= item.price%></td>
@@ -62,7 +62,7 @@
                 <td>
                   <div class="input-group col-lg-6">
                       <span class="input-group-btn"><button name="subtract" class="btn btn-default numcolor" type="button">-</button></span>
-                      <input class="form-control numlcation" name="number" type="text" value=<%= item.num%>>
+                      <input readonly style="background-color:#585858;" class="form-control numlcation" name="number" type="text" maxlength=2 value=<%= item.num%>>
                       <span class="input-group-btn"><button name="plus" class="btn btn-default numcolor" type="button">+</button></span>
                   </div>       
                 </td>
@@ -89,7 +89,6 @@
     <script type="text/javascript" src="../scripts/model/item.js"></script>
     <script type="text/javascript" src="../scripts/model/promotion.js"></script>
     <script type="text/javascript" src="../scripts/utils.js"></script>
-    <script type="text/javascript" src="../scripts/main.js"></script>
     <script type="text/javascript" src="../scripts/cart.js"></script>
 
   </body>

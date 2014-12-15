@@ -34,3 +34,28 @@
 	color: #333;
 	margin: 0 10px 0 10px;
 }
+.back{
+	background: #ccc;
+}
+.table-clo{
+	color: #FFFFFF;
+	background-color: #585858;
+	font-weight: 700;
+	font-family: tohama, arial;
+}
+.addInCart{
+	text-align: center;
+}
+
+.table-bordered>tbody>tr{
+	height: 100px;
+}
+.table-bordered>tbody>tr>td{
+	padding-top: 40px;
+	font-weight: 700;
+	font-size: 17px;
+	font-family: tohama, arial;
+}
+body{
+	color: #585858; 
+}
