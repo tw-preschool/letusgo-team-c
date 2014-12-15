@@ -45,10 +45,13 @@ function openEditLayer(name, price, unit, number,information,listItem) {
 	$('.overlay').find('#number').val(number);
   $('.overlay').find('#information').val(information);
 	$('.overlay').fadeIn();
-
 	$('.overlay').find('#submit').off();
 	$('.overlay').find('#submit').on('click', function(event){
 		event.preventDefault();
+	  if (!depictionChecking())
+		{
+			return;
+		}
 		$('.overlay').fadeOut();
 		editProduct(name, $('#name').val(), $('#price').val(), $('#unit').val(), $('#number').val(),$('#information').val(), listItem);
 	});
@@ -62,6 +65,10 @@ function openAddLayer() {
 	$('.overlay').find('#submit').off();
 	$('.overlay').find('#submit').on('click', function(event){
 		event.preventDefault();
+		if (!depictionChecking())
+		{
+			return;
+		}
 		$('.overlay').fadeOut();
 		addProduct($('#name').val(), $('#price').val(), $('#unit').val(), $('#number').val(), $('#information').val(),"false");
 	});
@@ -116,6 +123,7 @@ function changePromotionStatus(tr, check) {
 function addProduct(name, price, unit, number,information,promoted) {
 	$.ajax('/add', {
 		success: function(response) {
+			alert("success");
 			showAddProductLine(name, price, unit, number,information, promoted, response.productId)
 		},
 		type: 'post',
@@ -135,7 +143,6 @@ function deleteProductByName(productName) {
 }
 
 function editProduct(name, newName, newPrice, newUnit, newNumber, newInformation,listItem) {
-	console.log(newName);
 	$.ajax('/edit', {
 		success: function(response) {
 			listItem.find('.product-name').text(newName);
@@ -161,4 +168,17 @@ function generateNewProductItem(name, price, unit, number,information, promoted,
 		+ '</td><td class="product-unit">' + unit + '</td><td class="product-number">' + number + '</td><td class="product-information">'+information+'</td><td>' + editLink + deleteLink + checkBoxLink +
 		'</td></tr>');
 	return listItem;
+}
+
+function depictionChecking()
+{
+	if($('.overlay').find('#information').val().length > 10)
+		{
+			alert("商品描述信息上限为10个字，请重新输入");
+			return false;
+		}
+  else
+		{
+			return true;
+		}
 }

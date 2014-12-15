@@ -55,6 +55,7 @@ class POSApplication < Sinatra::Base
         content_type :html
         File.open('public/index.html').read
     end
+
     get '/delete' do
         begin
             product = Product.where(:name => params['name'])[0]
@@ -81,15 +82,14 @@ class POSApplication < Sinatra::Base
     end
 
     post '/edit' do
-        product = Product.where(:name => params['name']).first
-        product.attributes = {
+       product = Product.where(:name => params['name']).first
+       product.attributes = {
            :name => params[:newName],
            :price => params[:price],
            :unit => params[:unit],
            :number => params[:number],
            :information => params[:information]
         }
-
         if product.save
             [201, {:message => "products/#{product.id}"}.to_json]
         else
@@ -126,6 +126,9 @@ class POSApplication < Sinatra::Base
             end
     end
 
+    get '/products' do
+        products = Product.all
+    end
     get '/admin' do
         redirect '/login' unless session[:admin]
         products = Product.all
