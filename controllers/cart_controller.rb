@@ -8,13 +8,13 @@ def load_products
     erb :items
 end
 
-def add_into_cart(id,name,price,unit)
+def add_into_cart(name,price,unit)
         #item = Item.find(:first, :conditions => [ "name = ?", params[:name]])
         item = Item.where(:name => params['name']).first
-        if  item == nil
-            item = Item.create(:name => params[:name],
-                       :price => params[:price],
-                       :unit => params[:unit],
+        if  item.nil?
+            item = Item.create(:name => name,
+                       :price => price,
+                       :unit => unit,
                        :num => 1
                        )
         else
