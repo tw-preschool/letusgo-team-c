@@ -154,6 +154,12 @@ class POSApplication < Sinatra::Base
         clear_shoppingcart
     end
 
+    get '/payment' do
+        puts request.query_string 
+        
+        erb :payment
+    end
+
     after do
         ActiveRecord::Base.connection.close
     end

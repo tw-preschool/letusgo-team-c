@@ -64,7 +64,7 @@ def delete_promotion(item_id)
 end
 
 def get_shoppingcart_num
-    return Item.all.length
+    Item.all.length
 end
 
 def clear_shoppingcart
