@@ -14,7 +14,7 @@
     $("button[name='plus']").bind("click",{flag:1},calculateByPlusAndSub);
 
     $("button[name='subtract']").bind("click",{flag:0},calculateByPlusAndSub);
-    
+
     var record;
     var key;
     $("input[name='number']").keydown(function(e){
@@ -22,7 +22,7 @@
         key = e.keyCode;
         if(key == 8){
             this.value = record;
-        }   
+        }
     });
 
     $("input[name='number']").keyup(function() {
@@ -38,7 +38,7 @@
             this.value = record;
         }
     });
-    
+
 
     $("[name='remove']").click(function(){
         $(this).closest('tr').remove();
@@ -56,7 +56,7 @@
         $td = $(this).closest("td").siblings("td:first");
         var checked = $td.find(".sub").prop("checked");
         var price = $td.next().text();
-       
+
         var total = $td.parent().siblings("tr:last").find("[name='total']").text();
         var money = parseInt(total);
         if(checked){
@@ -78,11 +78,6 @@
         $td = $(this).closest("td").siblings("td:first");
 
         var checked = $td.find(".sub").prop("checked");
-        var subTotal  = parseInt($td.parent().find("[name='subTotal']").text());
-        var price = $td.next().text();
-        var promoted = $td.parent().attr("promoted");
-        var total = $td.parent().siblings("tr:last").find("[name='total']").text();
-        var money = parseInt(total) - subTotal;
 
         if (e.data.flag == 1) {
             $input.val(++val);
@@ -92,6 +87,22 @@
             }
         }
 
+        if (checked) {
+            $td.parent().siblings("tr:last").find("[name='total']").text("0");
+            $(".sub").each(calculate);
+        }
+        else{
+          var subTotal = calculateSubTotal($td);
+          $td.parent().find("[name='subTotal']").text(subTotal);
+        }
+    }
+
+    function calculateSubTotal($td){
+        var promoted = $td.parent().attr("promoted");
+        var price = $td.next().text();
+        var val = parseInt($td.parent().find("[name='number']").val());
+        var subTotal = $td.parent().find("[name='subTotal']").text();
+
         if (promoted == "true" && val > 2) {
             subTotal = parseInt(price) * (val - Math.floor(val/3));
             $td.find(".show_promotion").show();
@@ -100,18 +111,14 @@
             $td.find(".show_promotion").hide();
         }
 
-        money += subTotal;
-
         $td.parent().find("[name='subTotal']").text(subTotal);
-        if (checked) {
-            $td.parent().siblings("tr:last").find("[name='total']").text("0");
-            $(".sub").each(calculate);
-        }
+        return subTotal;
+
     }
 
     function calculate(){
         $td = $(this).parent();
-        var subTotal = $td.parent().find("[name='subTotal']").text();
+        var subTotal = calculateSubTotal($td);
         var totalNode = $td.parent().siblings("tr:last").find("[name='total']");
         var newMoney = this.checked ? (parseInt(totalNode.text()) + parseInt(subTotal)) : (parseInt(totalNode.text()) - parseInt(subTotal));
         totalNode.text(newMoney);
