@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 require 'rubygems'
 require 'sinatra'
 require 'rack/contrib'
@@ -6,6 +7,8 @@ require 'json'
 require './models/product'
 require './models/item'
 require './controllers/cart_controller'
+
+
 class LoginScreen < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 60*60*24*7
   configure do
@@ -153,13 +156,11 @@ class POSApplication < Sinatra::Base
     post '/close' do
         clear_shoppingcart
     end
-
+    
     get '/payment' do
-        puts request.query_string 
-        
         erb :payment
     end
-
+    
     after do
         ActiveRecord::Base.connection.close
     end
