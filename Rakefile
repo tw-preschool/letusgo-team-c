@@ -1,4 +1,5 @@
 require 'active_record'
+require 'sinatra/activerecord/rake'
 require 'logger'
 require 'yaml'  
 

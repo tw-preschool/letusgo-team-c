@@ -1,5 +1,6 @@
 require 'rubygems'
 require 'sinatra'
+require 'sinatra/activerecord'
 require 'rack/contrib'
 require 'active_record'
 require 'json'
