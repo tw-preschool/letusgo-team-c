@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 	$('#item-table').find('.edit-product').on('click', function(event) {
 		event.preventDefault();
 		var listItem = $(this).closest('tr');

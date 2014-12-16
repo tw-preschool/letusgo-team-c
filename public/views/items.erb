@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title>Pos Web</title>
- 
+
   <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="../styles/main.css"/>
 </head>
@@ -23,7 +23,8 @@
       <div class="container row col-xs-１">
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/shop"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车 (<span id="count"><%= @count %></span>)</a></li>
-        </ul>
+         <li><a id="logout" href="#" ><span>退出</span></a></li>
+      </ul>
       </div>
     </div>
   </nav>
@@ -67,6 +68,6 @@
   <script type="text/javascript" src="../scripts/model/promotion.js"></script>
   <script type="text/javascript" src="../scripts/utils.js"></script>
   <script type="text/javascript" src="../scripts/items.js"></script>
-
+  <script type="text/javascript" src="../scripts/login.js"></script>
 </body>
 </html>

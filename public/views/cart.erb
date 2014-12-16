@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <title>Pos Web</title>
-  
-  
+
+
   <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="../styles/cart.css"/>
   <link rel="stylesheet" href="../styles/main.css"/>
-  
+
 </head>
 
 <body>
@@ -27,7 +27,8 @@
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车(<span id="count"><%= @count %></span>)</a></li>
-        </ul>
+          <li><a id="logout" href="#" ><span>退出</span></a></li>
+      </ul>
       </div>
     </div>
   </nav>
@@ -64,7 +65,7 @@
                       <span class="input-group-btn"><button name="subtract" class="btn btn-default numcolor" type="button">-</button></span>
                       <input readonly style="background-color:#585858;" class="form-control numlcation" name="number" type="text" maxlength=2 value=<%= item.num%>>
                       <span class="input-group-btn"><button name="plus" class="btn btn-default numcolor" type="button">+</button></span>
-                  </div>       
+                  </div>
                 </td>
                 <td class="money">
                     <p name="subTotal" style="display:inline-block"><%= item.price * item.num%></p>
@@ -90,6 +91,7 @@
     <script type="text/javascript" src="../scripts/model/promotion.js"></script>
     <script type="text/javascript" src="../scripts/utils.js"></script>
     <script type="text/javascript" src="../scripts/cart.js"></script>
+    <script type="text/javascript" src="../scripts/login.js"></script>
 
   </body>
   </html>

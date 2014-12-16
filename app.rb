@@ -16,9 +16,11 @@ class LoginScreen < Sinatra::Base
   post '/login' do
     if params[:name] == settings.username && params[:password] == settings.password
        session[:admin] = true
+       session[:login] = true
        return session[:admin].to_json
     else
       session[:admin] = false
+      session[:login] = false
       return session[:admin].to_json
     end
   end
@@ -32,7 +34,19 @@ class LoginScreen < Sinatra::Base
   redirect '/login' unless session[:admin]
   redirect '/admin'
   end
+
+    post '/logout' do
+    if(session[:login] == true)
+      session[:login] = false
+      session[:admin] = false
+      return true.to_json
+    else
+      session[:login] = false
+      return session[:login].to_json
+    end
+  end
 end
+
 
 class POSApplication < Sinatra::Base
   use LoginScreen
