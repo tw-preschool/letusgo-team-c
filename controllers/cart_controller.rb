@@ -3,9 +3,7 @@ require 'active_record'
 
 
 def load_products
-    #products = Product.all
-    products = Product.find(:all, :conditions=>"number>=1")
-    @products = products
+    @products = Product.where("number>=1")
     @count = get_shoppingcart_num
     erb :items
 end

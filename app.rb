@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'rubygems'
 require 'sinatra'
+require 'sinatra/activerecord'
 require 'rack/contrib'
 require 'active_record'
 require 'json'
