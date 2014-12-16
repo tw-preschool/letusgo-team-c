@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+  showOrLoginUser();
   $('#logout').on("click",function(event){
     event.preventDefault();
       $.ajax({
@@ -19,6 +19,7 @@ $(document).ready(function(){
         }
       });
   });
+
   var loginUrl="/login";
   $(":radio").each(function(){
     $(this).click(function(){
@@ -43,10 +44,11 @@ $(document).ready(function(){
       }
     sendMessage(name,password,loginUrl);
     });
-    $('#cancel').on("click",function(event){
-      event.preventDefault();
-      window.location.href = "../index.html";
-    });
+
+  $('#cancel').on("click",function(event){
+    event.preventDefault();
+    window.location.href = "../index.html";
+  });
 });
 
 var sendMessage = function(name,password,loginUrl){
@@ -71,5 +73,30 @@ var sendMessage = function(name,password,loginUrl){
       }
 
     }
+  });
+};
+
+var showOrLoginUser = function(){
+  $.ajax({
+    type:"GET",
+    url:"/showUser",
+    dataType:"json",
+    success:function(data){
+     if(data === false)
+       {
+         $("#title-login").find("span").text("登陆");
+       }
+     else
+       {
+         $("#title-login").find("span").text(data);
+       }
+    }
+  });
+  $("#title-login").on("click",function(event){
+    event.preventDefault();
+    if($(this).find("span").text() == "登陆")
+      {
+        window.location.href = "/login";
+      }
   });
 };

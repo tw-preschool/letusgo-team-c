@@ -7,33 +7,33 @@ require './models/product'
 require './models/item'
 require './controllers/cart_controller'
 class LoginScreen < Sinatra::Base
-  use Rack::Session::Pool, :expire_after => 60*60*24*7
-  configure do
-    set :username, 'admin'
-    set :password, 'admin'
-  end
-
-  post '/login' do
-    if params[:name] == settings.username && params[:password] == settings.password
-       session[:admin] = true
-       session[:login] = true
-       return session[:admin].to_json
-    else
-      session[:admin] = false
-      session[:login] = false
-      return session[:admin].to_json
+    use Rack::Session::Pool, :expire_after => 60*60*24*7
+    configure do
+      set :username, 'admin'
+      set :password, 'admin'
     end
-  end
 
-  set :views, settings.root + '/public/views'
-  get '/login' do
-    erb :login
-  end
+    post '/login' do
+      if params[:name] == settings.username && params[:password] == settings.password
+         session[:admin] = true
+         session[:login] = true
+         return session[:admin].to_json
+      else
+        session[:admin] = false
+        session[:login] = false
+        return session[:admin].to_json
+      end
+    end
 
-  get '/judgelogin' do
-  redirect '/login' unless session[:admin]
-  redirect '/admin'
-  end
+    set :views, settings.root + '/public/views'
+    get '/login' do
+      erb :login
+    end
+
+    get '/judgelogin' do
+    redirect '/login' unless session[:admin]
+    redirect '/admin'
+    end
 
     post '/logout' do
     if(session[:login] == true)
@@ -43,6 +43,18 @@ class LoginScreen < Sinatra::Base
     else
       session[:login] = false
       return session[:login].to_json
+    end
+  end
+
+    get "/showUser" do
+    if session[:login] == true
+      if session[:admin] == true
+         return settings.username.to_json
+      else
+         return session[:name].to_json
+      end
+    else
+       return false.to_json
     end
   end
 end
