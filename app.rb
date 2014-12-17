@@ -7,6 +7,7 @@ require 'active_record'
 require 'json'
 require './models/product'
 require './models/item'
+require './models/order'
 require './controllers/cart_controller'
 
 
@@ -160,6 +161,23 @@ class POSApplication < Sinatra::Base
     
     get '/payment' do
         erb :payment
+    end
+
+    post '/payment' do
+        Order.create(:details => params[:list]).save
+    end
+
+    get '/orders/:guid' do
+        order = Order.where(:id => params[:guid]).first
+        unless order.nil?
+            obj = JSON.parse order.details
+            #puts obj["shopping_items"]
+            @shopping_items = obj["shopping_items"]
+            @promotion_items = obj["promotion_items"]
+            @total = obj["totalMoney"]
+            @subTotal = obj["totalSavingMoney"]
+            erb :order
+        end
     end
     
     after do
