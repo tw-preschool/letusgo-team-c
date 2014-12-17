@@ -180,7 +180,7 @@ class POSApplication < Sinatra::Base
         erb :orderlist
     end
     get '/orders/:guid' do
-        order = Order.where(:id => params[:guid]).first
+        order = Order.where(:guid => params[:guid]).first
         unless order.nil?
             obj = JSON.parse order.details
             #puts obj["shopping_items"]
@@ -188,6 +188,8 @@ class POSApplication < Sinatra::Base
             @promotion_items = obj["promotion_items"]
             @total = obj["totalMoney"]
             @subTotal = obj["totalSavingMoney"]
+            @guid = order.guid
+            @time = order.created_at
             erb :order
         end
     end

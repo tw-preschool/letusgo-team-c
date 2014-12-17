@@ -108,7 +108,6 @@
          return guid;
      }
 
-
      $("[name='payment']").click(function() {
          var totalSavingMoney = 0.00;
          var payment_list = {
@@ -148,11 +147,13 @@
              payment_list.totalMoney = parseInt($("[name='total']").text());
          }
          $(".sub").each(payment);
-         sessionStorage.setItem("payinfo", JSON.stringify(payment_list));
-         //$(this).attr('href', '/payment');
+         //sessionStorage.setItem("payinfo", JSON.stringify(payment_list));
          $.post("/payment", {
-             guid: creatGuid(),
-             list: JSON.stringify(payment_list)
-         });
-     });
+                 guid: creatGuid(),
+                 list: JSON.stringify(payment_list)
+             },
+              function(data) {
+                 location.href = '/orders';
+             });
+        });
  });
