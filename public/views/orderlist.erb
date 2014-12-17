@@ -27,10 +27,12 @@
   </nav>
 
   <div class="container theme-showcase order_border" role="main">
-    <% unless @orderlist.nil? %>
+    <% if @orderlist.nil? || @orderlist.length == 0  %>
+      <h1>当前无任何订单,请前往<a href="/views/items">商品列表</a>进行购买！</h1>
+    <% else %>
       <% @orderlist.each do |order|%>
         <div id="navbar" class="navbar-collapse collapse box">
-            <p>订单编号：<%= order["guid"] %><span class="glyphicon glyphicon-remove remove"></span></p>
+            <p>订单编号：<%= order["guid"] %><span name="remove" id=<%= order["guid"] %> class="glyphicon glyphicon-remove remove"></span></p>
             <ul class="nav navbar-nav order">
               <li>
                 <a href="/orders/<%= order["guid"] %>"class="datails">订单详情<span class="glyphicon glyphicon-list-alt"></span></a>
@@ -51,6 +53,7 @@
   <script type="text/javascript" src="../scripts/model/item.js"></script>
   <script type="text/javascript" src="../scripts/model/promotion.js"></script>
   <script type="text/javascript" src="../scripts/utils.js"></script>
+   <script type="text/javascript" src="../scripts/orderlist.js"></script>
 
 </body>
 </html>

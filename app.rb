@@ -193,6 +193,13 @@ class POSApplication < Sinatra::Base
             erb :order
         end
     end
+
+    post '/deleteOrder' do
+        order = Order.where(:guid => params[:guid]).first
+        unless order.nil?
+            order.destroy
+        end
+    end
     
     after do
         ActiveRecord::Base.connection.close
