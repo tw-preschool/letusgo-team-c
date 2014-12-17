@@ -1,11 +1,15 @@
+# -*- encoding : utf-8 -*-
 require 'rubygems'
 require 'sinatra'
+require 'sinatra/activerecord'
 require 'rack/contrib'
 require 'active_record'
 require 'json'
 require './models/product'
 require './models/item'
 require './controllers/cart_controller'
+
+
 class LoginScreen < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 60*60*24*7
   set :views, settings.root + '/public/views'
@@ -113,7 +117,7 @@ class POSApplication < Sinatra::Base
     end
 
     post '/items' do
-        add_into_cart(params[:id],params[:name],params[:price],params[:unit])
+        add_into_cart(params[:name],params[:price],params[:unit])
     end
 
     get '/products/:id' do
@@ -135,6 +139,15 @@ class POSApplication < Sinatra::Base
             else
                 halt 500, {:message => "create product failed"}.to_json
             end
+    end
+
+    get '/products' do
+        begin 
+          products = Product.all || []
+          products.to_json
+        rescue ActiveRecord::RecordNotFound => e
+            [404, {:message => e.message}.to_json ]
+        end
     end
 
     get '/admin' do
@@ -164,7 +177,11 @@ class POSApplication < Sinatra::Base
     post '/close' do
         clear_shoppingcart
     end
-
+    
+    get '/payment' do
+        erb :payment
+    end
+    
     after do
         ActiveRecord::Base.connection.close
     end
