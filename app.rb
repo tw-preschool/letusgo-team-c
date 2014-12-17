@@ -130,6 +130,15 @@ class POSApplication < Sinatra::Base
             end
     end
 
+    get '/products' do
+        begin 
+          products = Product.all || []
+          products.to_json
+        rescue ActiveRecord::RecordNotFound => e
+            [404, {:message => e.message}.to_json ]
+        end
+    end
+
     get '/admin' do
         redirect '/login' unless session[:admin]
         products = Product.all
