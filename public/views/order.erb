@@ -32,12 +32,12 @@
         <thead>
           <tr>
             <th style="background: #ccc;" class="active" colspan="5">
-              <h3>订单编号:<%= @guid %>
+              <h3 class="order_title"><strong>订单编号:<%= @guid %></strong>
                 <a href="/orders">
                 <span class="glyphicon glyphicon-arrow-left goback">返回</span>
                 </a>
               </h3>
-              <h3>订购时间:<%= @time %></h3>
+              <h3 class="order_title"><strong>订购时间:<%= @time %></strong></h3>
               <h4 class="details">订单明细</h4>
             </th>
           </tr>
@@ -66,7 +66,7 @@
       <table class="table table-bordered back"  style="table-layout:fixed">
         <thead>
           <tr>
-            <th style="background: #ccc;" class="active" colspan="3"><h4>赠送商品</h4></th>
+            <th style="background: #ccc; text-align:center;" class="active" colspan="3"><h4>赠送商品</h4></th>
           </tr>
           <tr  class="table-clo">
             <th>名称</th>
