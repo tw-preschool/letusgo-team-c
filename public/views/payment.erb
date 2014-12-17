@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>Pos Web</title> 
   <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="../styles/main.css"/>
+  <link rel="stylesheet" href="../styles/payment.css"/>
 </head>
 
 <body>
@@ -28,12 +28,12 @@
 
   <div class="container theme-showcase" role="main">
     <div class="panel panel-default">
-      <table class="shopping-list table table-bordered"  style="table-layout:fixed">
+      <table class="shopping-list table table-bordered back"  style="table-layout:fixed">
         <thead>
           <tr>
-            <th class="active" colspan="5"><h4>购物清单</h4></th>
+            <th style="background: #ccc;" class="active" colspan="5"><h4>购物清单</h4></th>
           </tr>
-          <tr>
+          <tr class="table-clo">
             <th>名称</th>
             <th>单价(元)</th>
             <th>单位</th>
@@ -44,12 +44,12 @@
         <tbody name="shopping">
         </tbody>
       </table>
-      <table class="table table-bordered"  style="table-layout:fixed">
+      <table class="table table-bordered back"  style="table-layout:fixed">
         <thead>
           <tr>
-            <th class="active" colspan="3"><h4>赠送商品</h4></th>
+            <th style="background: #ccc;" class="active" colspan="3"><h4>赠送商品</h4></th>
           </tr>
-          <tr>
+          <tr  class="table-clo">
             <th>名称</th>
             <th>数量</th>
             <th>单位</th>
@@ -60,8 +60,8 @@
         <tfoot>
             <tr>
               <td colspan="3" style="text-align:right">
-                <p>总计：<span name="totalMoney">0.00</span>元</p>
-                <p>节约：<span name="totalSavingMoney">0.00</span>元</p>
+                <p class="money">总计：<span name="totalMoney">0.00</span>元</p>
+                <p class="money">节约：<span name="totalSavingMoney">0.00</span>元</p>
               </td>
           </tr>
         </tfoot>
