@@ -106,12 +106,13 @@
          var payment_list = {
              shopping_items: [],
              promotion_items: [],
-             totalMoney:0.00,
-             totalSavingMoney:0.00
+             totalMoney: 0.00,
+             totalSavingMoney: 0.00
          };
 
          function payment() {
              var $td = $(this).parent();
+             var promoted = $td.parent().attr("promoted");
              var name = $(this).next().text();
              var $price = $td.next();
              var price = new Number($price.text());
@@ -126,18 +127,20 @@
                      num: num,
                      subTotal: subTotal
                  });
-                 payment_list.promotion_items.push({
-                     name: name,
-                     unit: unit,
-                     num: Math.floor(num / 3)
-                 });
-                 totalSavingMoney += (price * num) - subTotal;
+                 if (promoted == "true" && Math.floor(num / 3) > 0) {
+                     payment_list.promotion_items.push({
+                         name: name,
+                         unit: unit,
+                         num: Math.floor(num / 3)
+                     });
+                     totalSavingMoney += (price * num) - subTotal;
+                 }
              }
-             payment_list.totalSavingMoney=totalSavingMoney;
-             payment_list.totalMoney=parseInt($("[name='total']").text());
+             payment_list.totalSavingMoney = totalSavingMoney;
+             payment_list.totalMoney = parseInt($("[name='total']").text());
          }
          $(".sub").each(payment);
-         sessionStorage.setItem("payinfo",JSON.stringify(payment_list));
+         sessionStorage.setItem("payinfo", JSON.stringify(payment_list));
          $(this).attr('href', '/payment');
      });
  });

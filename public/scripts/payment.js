@@ -11,7 +11,7 @@ $(document).ready(function () {
  	 }; 
  	 var promotion_list = "";
  	 for (var i = 0; i < payinfo.promotion_items.length; i++) {
- 	 	var item = payinfo.shopping_items[i];
+ 	 	var item = payinfo.promotion_items[i];
  	 	promotion_list+= '<tr><td>'+item.name+'</td>'+
 		 	 		'<td>'+item.num+'</td>'+
 		 	 		'<td>'+item.unit+'</td></tr>';
