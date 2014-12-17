@@ -31,7 +31,11 @@
       <table class="shopping-list table table-bordered back"  style="table-layout:fixed">
         <thead>
           <tr>
-            <th style="background: #ccc;" class="active" colspan="5"><h4>购物清单</h4></th>
+            <th style="background: #ccc;" class="active" colspan="5">
+              <h3>订单编号:<%= @guid %></h3>
+              <h3>订购时间:<%= @time %></h3>
+              <h4 class="details">订单明细</h4>
+            </th>
           </tr>
           <tr class="table-clo">
             <th>名称</th>
@@ -44,11 +48,13 @@
         <tbody name="shopping">
            <% unless @shopping_items.nil? %>
               <% @shopping_items.each do |item| %>
-                <td><%= item["name"]%></td>
-                <td><%= item["price"]%></td>
-                <td><%= item["unit"]%></td>
-                <td><%= item["num"]%></td>
-                <td><%= item["subTotal"]%></td>
+                <tr>
+                  <td><%= item["name"]%></td>
+                  <td><%= item["price"]%></td>
+                  <td><%= item["unit"]%></td>
+                  <td><%= item["num"]%></td>
+                  <td><%= item["subTotal"]%></td>
+                </tr>
               <% end %>
            <% end %>
         </tbody>

@@ -9,11 +9,12 @@
 }
 .order{
 	margin-top: 20px;
-	margin-left:400px;
+	margin-left:250px;
 	height: 60px;
 }
 .order li{
 	margin-right: 150px;
+	text-align: left;
 }
 body{
 	/* background-color: #222; */
@@ -24,3 +25,7 @@ body{
 	float: right;
 	width: 6px;
 }
+.order li a{
+   padding-top: 5px;
+}
+

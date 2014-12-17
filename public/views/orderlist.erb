@@ -27,16 +27,21 @@
   </nav>
 
   <div class="container theme-showcase" role="main">
-    <div id="navbar" class="navbar-collapse collapse box">
-        <p>订单编号：123123123123<span class="glyphicon glyphicon-remove remove"></span></p>
-        <ul class="nav navbar-nav order">
-          <li>时间</li>
-          <li>金额</li>
-          <li>
-            订单详情<span class="glyphicon glyphicon-list-alt"></span></li>
-        </ul>
-    </div>
-    
+    <% unless @orderlist.nil? %>
+      <% @orderlist.each do |order|%>
+        <div id="navbar" class="navbar-collapse collapse box">
+            <p>订单编号：<%= order["guid"] %><span class="glyphicon glyphicon-remove remove"></span></p>
+            <ul class="nav navbar-nav order">
+              <li>
+                <a href="/orders/<%= order["guid"] %>"class="datails">订单详情<span class="glyphicon glyphicon-list-alt"></span></a>
+              </li>
+              <li><%= order["time"] %></li>
+              <li><%= order["totalMoney"] %>¥</li>
+              
+            </ul>
+        </div>
+      <% end %>
+    <% end %>
   </div>
   
 
