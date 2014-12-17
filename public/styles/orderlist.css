@@ -1,7 +1,7 @@
 .box{
 	
 	border: 2px solid;
-	margin-bottom: 10px;
+	margin-bottom: 15px;
 	color: #585858;
 	font-size: 20px;
 	background: #ccc;
@@ -31,5 +31,8 @@ body{
 .order_border{
 	border: 2px solid;
 	padding-top: 15px;
+}
+.details{
+	top:3px;
 }
 

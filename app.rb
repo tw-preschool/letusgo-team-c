@@ -188,7 +188,7 @@ class POSApplication < Sinatra::Base
     end
 
     get '/orders' do
-        orders = Order.all || []
+        orders = Order.find_by_sql(['select * from orders order by created_at DESC']) || []
         list = []
         orders.each do |order|
             obj = JSON.parse order.details

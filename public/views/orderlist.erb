@@ -35,7 +35,7 @@
             <p>订单编号：<%= order["guid"] %><span name="remove" id=<%= order["guid"] %> class="glyphicon glyphicon-remove remove"></span></p>
             <ul class="nav navbar-nav order">
               <li>
-                <a href="/orders/<%= order["guid"] %>"class="datails">订单详情<span class="glyphicon glyphicon-list-alt"></span></a>
+                <a href="/orders/<%= order["guid"] %>"class="datails">详情信息<span class="glyphicon glyphicon-list-alt details"></span></a>
               </li>
               <li><%= order["time"] %></li>
               <li><%= order["totalMoney"] %>¥</li>
