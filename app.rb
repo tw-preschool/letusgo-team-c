@@ -8,6 +8,7 @@ require './models/item'
 require './controllers/cart_controller'
 class LoginScreen < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 60*60*24*7
+  set :views, settings.root + '/public/views'
   configure do
     set :username, 'admin'
     set :password, 'admin'
@@ -32,6 +33,16 @@ class LoginScreen < Sinatra::Base
   redirect '/login' unless session[:admin]
   redirect '/admin'
   end
+
+  post '/register' do
+      return true
+  end
+
+  get '/register' do
+    erb :register
+  end
+
+
 end
 
 class POSApplication < Sinatra::Base

@@ -57,5 +57,23 @@
 	font-family: tohama, arial;
 }
 body{
-	color: #585858; 
+	color: #585858;
+}
+
+input:required:invalid{
+  white-space:normal;
+
+}
+input:required:valid{
+  background: rgba(13, 153, 12, 0.26);
+}
+
+
+.ic_plaint{
+  display: inline-block;
+  color: red;
+}
+.ic_wrong{
+  display: none;
+  color: red;
 }
