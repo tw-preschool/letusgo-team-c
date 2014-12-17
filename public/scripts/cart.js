@@ -99,6 +99,14 @@
      }
      $(".all").click();
 
+     function creatGuid() {
+         var guid = "";
+         for (var i = 1; i <= 32; i++) {
+             var n = Math.floor(Math.random() * 16.0).toString(16);
+             guid += n;
+         }
+         return guid;
+     }
 
 
      $("[name='payment']").click(function() {
@@ -141,6 +149,10 @@
          }
          $(".sub").each(payment);
          sessionStorage.setItem("payinfo", JSON.stringify(payment_list));
-         $(this).attr('href', '/payment');
+         //$(this).attr('href', '/payment');
+         $.post("/payment", {
+             guid: creatGuid(),
+             list: JSON.stringify(payment_list)
+         });
      });
  });

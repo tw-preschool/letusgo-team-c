@@ -164,9 +164,21 @@ class POSApplication < Sinatra::Base
     end
 
     post '/payment' do
-        Order.create(:details => params[:list]).save
+        Order.create(:guid => params[:guid] ,:details => params[:list]).save
     end
 
+    get '/orders' do
+        orders = Order.all || []
+        list = []
+        orders.each do |order|
+            obj = JSON.parse order.details
+            obj["guid"] = order.guid
+            obj["time"] = order.created_at
+            list.push(obj)
+        end
+        @orderlist = list
+        erb :orderlist
+    end
     get '/orders/:guid' do
         order = Order.where(:id => params[:guid]).first
         unless order.nil?
