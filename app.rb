@@ -188,6 +188,7 @@ class POSApplication < Sinatra::Base
     end
 
     get '/orders' do
+        redirect '/login' unless session[:admin]
         orders = Order.find_by_sql(['select * from orders order by created_at DESC']) || []
         list = []
         orders.each do |order|
