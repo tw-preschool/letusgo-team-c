@@ -68,3 +68,7 @@ body{
 .details{
 	margin-top: 20px;
 }
+.goback{
+	float: right;
+	color: #585858; 
+}
