@@ -13,6 +13,7 @@ require './controllers/cart_controller'
 
 class LoginScreen < Sinatra::Base
   use Rack::Session::Pool, :expire_after => 60*60*24*7
+  set :views, settings.root + '/public/views'
   configure do
     set :username, 'admin'
     set :password, 'admin'
@@ -37,6 +38,16 @@ class LoginScreen < Sinatra::Base
   redirect '/login' unless session[:admin]
   redirect '/admin'
   end
+
+  post '/register' do
+      return true
+  end
+
+  get '/register' do
+    erb :register
+  end
+
+
 end
 
 class POSApplication < Sinatra::Base
@@ -129,6 +140,15 @@ class POSApplication < Sinatra::Base
             else
                 halt 500, {:message => "create product failed"}.to_json
             end
+    end
+
+    get '/products' do
+        begin 
+          products = Product.all || []
+          products.to_json
+        rescue ActiveRecord::RecordNotFound => e
+            [404, {:message => e.message}.to_json ]
+        end
     end
 
     get '/admin' do

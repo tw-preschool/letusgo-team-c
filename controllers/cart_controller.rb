@@ -9,7 +9,6 @@ def load_products
 end
 
 def add_into_cart(name,price,unit)
-    #item = Item.find(:first, :conditions => [ "name = ?", params[:name]])
     item = Item.where(:name => params['name']).first
     if  item.nil?
         item = Item.create(:name => name,
