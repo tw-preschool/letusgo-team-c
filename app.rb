@@ -1,17 +1,25 @@
+# -*- encoding : utf-8 -*-
 require 'rubygems'
 require 'sinatra'
+require 'sinatra/activerecord'
 require 'rack/contrib'
 require 'active_record'
 require 'json'
 require './models/product'
 require './models/item'
+require './models/order'
 require './controllers/cart_controller'
+
+
 class LoginScreen < Sinatra::Base
-    use Rack::Session::Pool, :expire_after => 60*60*24*7
-    configure do
-      set :username, 'admin'
-      set :password, 'admin'
-    end
+
+  use Rack::Session::Pool, :expire_after => 60*60*24*7
+  set :views, settings.root + '/public/views'
+  configure do
+    set :username, 'admin'
+    set :password, 'admin'
+  end
+
 
     post '/login' do
       if params[:name] == settings.username && params[:password] == settings.password
@@ -57,6 +65,16 @@ class LoginScreen < Sinatra::Base
        return false.to_json
     end
   end
+
+  post '/register' do
+      return true
+  end
+
+  get '/register' do
+    erb :register
+  end
+
+
 end
 
 
@@ -128,7 +146,7 @@ class POSApplication < Sinatra::Base
     end
 
     post '/items' do
-        add_into_cart(params[:id],params[:name],params[:price],params[:unit])
+        add_into_cart(params[:name],params[:price],params[:unit])
     end
 
     get '/products/:id' do
@@ -153,8 +171,15 @@ class POSApplication < Sinatra::Base
     end
 
     get '/products' do
-        products = Product.all
+        begin
+          products = Product.all || []
+          products.to_json
+        rescue ActiveRecord::RecordNotFound => e
+            [404, {:message => e.message}.to_json ]
+        end
     end
+
+
     get '/admin' do
         redirect '/login' unless session[:admin]
         products = Product.all
@@ -181,6 +206,49 @@ class POSApplication < Sinatra::Base
 
     post '/close' do
         clear_shoppingcart
+    end
+
+    get '/payment' do
+        erb :payment
+    end
+
+    post '/payment' do
+        Order.create(:guid => params[:guid] ,:details => params[:list]).save
+    end
+
+    get '/orders' do
+        redirect '/login' unless session[:admin]
+        orders = Order.find_by_sql(['select * from orders order by created_at DESC']) || []
+        list = []
+        orders.each do |order|
+            obj = JSON.parse order.details
+            obj["guid"] = order.guid
+            obj["time"] = order.created_at
+            list.push(obj)
+        end
+        @orderlist = list
+        erb :orderlist
+    end
+    get '/orders/:guid' do
+        order = Order.where(:guid => params[:guid]).first
+        unless order.nil?
+            obj = JSON.parse order.details
+            #puts obj["shopping_items"]
+            @shopping_items = obj["shopping_items"]
+            @promotion_items = obj["promotion_items"]
+            @total = obj["totalMoney"]
+            @subTotal = obj["totalSavingMoney"]
+            @guid = order.guid
+            @time = order.created_at
+            erb :order
+        end
+    end
+
+    post '/deleteOrder' do
+        order = Order.where(:guid => params[:guid]).first
+        unless order.nil?
+            order.destroy
+        end
     end
 
     after do

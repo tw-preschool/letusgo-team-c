@@ -4,36 +4,30 @@ require_relative '../spec_helper'
 
 describe 'Products Application' do
 
-  describe 'List all products' do
-<<<<<<< HEAD
-    before { get '/products' }
-
-=======
-    #before { get '/views/items' }
-    
->>>>>>> 0ee9d67fa77d35924b795ae9f41962b397115dd7
-    it 'is successful' do
-      get '/views/items'
+  context 'products list' do
+  	before { get '/products' }
+    it 'show properly' do
       expect(last_response.status).to eq 200
     end
-<<<<<<< HEAD
-
-    it 'is empty at the very begining' do
-      list = get '/products'
-      expect(list.length).to eq 0
+    it 'have no product yet' do
+    	products = JSON.parse(last_response.body)
+    	expect(products.length).to eq 0
     end
   end
 
-  describe 'Create a Product' do
-  	let(:body) { {:name => "Mac Book Pro", :price => 13456.89, :unit => "台",:information => "coo"} }
+  context 'add new product' do
+  	let(:body) { {:name => "Mac Book Pro", :price => 13456.89, :unit => "台"} }
+  	before { post 'products', body, {'Content-Type' => 'application/json'} }
 
-  	it 'create a product'  do
-  		post '/products', body, {'Content-Type' => 'application/json'}
+  	it 'insert into database properly' do
   		expect(last_response.status).to eq 201
-
   	end
 
-=======
->>>>>>> 0ee9d67fa77d35924b795ae9f41962b397115dd7
+  	it 'can find in database' do
+  		Product.all.last.name.should == "Mac Book Pro"
+  		Product.all.last.price.should == 13456.89
+  		Product.all.last.unit.should == "台"
+  	end
+
   end
 end

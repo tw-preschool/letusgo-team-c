@@ -3,7 +3,7 @@
 }
 
 .shopping-list {
-	margin-bottom: 0px;
+	margin-bottom: 10px;
 }
 
 .overlay{
@@ -48,32 +48,28 @@
 }
 
 .table-bordered>tbody>tr{
-	height: 100px;
+	height: 50px;
 }
 .table-bordered>tbody>tr>td{
-	padding-top: 40px;
+	padding-top: 20px;
 	font-weight: 700;
 	font-size: 17px;
 	font-family: tohama, arial;
 }
 body{
-	color: #585858;
+	color: #585858; 
 }
-
-input:required:invalid{
-  white-space:normal;
-
+.money{
+	/* color: #585858; */
+	font-weight: 700;
+	font-size: 22px;
+	font-family: tohama, arial;
 }
-input:required:valid{
-  background: rgba(13, 153, 12, 0.26);
+.details{
+	margin-top: 60px;
+	text-align: center;
 }
-
-
-.ic_plaint{
-  display: inline-block;
-  color: red;
-}
-.ic_wrong{
-  display: none;
-  color: red;
+.goback{
+	float: right;
+	color: #585858; 
 }

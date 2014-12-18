@@ -1,0 +1,38 @@
+.box{
+	
+	border: 2px solid;
+	margin-bottom: 15px;
+	color: #585858;
+	font-size: 20px;
+	background: #ccc;
+	font-weight: 700;
+}
+.order{
+	margin-top: 20px;
+	margin-left:250px;
+	height: 60px;
+}
+.order li{
+	margin-right: 150px;
+	text-align: left;
+}
+body{
+	/* background-color: #222; */
+	color: #585858;
+}
+
+.remove{
+	float: right;
+	width: 6px;
+}
+.order li a{
+   padding-top: 5px;
+}
+.order_border{
+	border: 2px solid;
+	padding-top: 15px;
+}
+.details{
+	top:3px;
+}
+

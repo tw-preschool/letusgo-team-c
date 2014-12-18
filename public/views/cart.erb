@@ -24,6 +24,7 @@
         <ul class="nav navbar-nav">
           <li><a href="../index.html">主页</a></li>
           <li><a href="views/items">商品列表</a></li>
+          <li><a href="/orders">订单管理</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="active"><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车(<span id="count"><%= @count %></span>)</a></li>
@@ -54,7 +55,8 @@
           <% @items.each do |item| %>
             <tr id=<%= item.id %> promoted=<%= item.promoted%>>
                 <td>
-                  <input type="checkbox" class="sub" style="margin-right:4px"><%= item.name%>
+                  <input type="checkbox" class="sub" style="margin-right:4px">
+                  <label><%= item.name%></label>
                   <div style="display: <%= (item.promoted=="true" && item.num > 2) ? "block" : "none" %>;" class="show_promotion">
                     <a class="promotion">买二送一啦~</a>
                   </div>
@@ -78,7 +80,7 @@
           <% end %>
           <tr>
             <td colspan="5" style="text-align:right"><p>总计：<span class="money" name="total">0.00</span>元</p>
-              <a href="./payment.html" class="btn btn-primary btn-small" role="button">付款</a></td>
+              <a name="payment" class="btn btn-primary btn-small" role="button">付款</a></td>
           </tr>
           </tbody>
         </table>
@@ -93,6 +95,8 @@
     <script type="text/javascript" src="../scripts/utils.js"></script>
     <script type="text/javascript" src="../scripts/cart.js"></script>
     <script type="text/javascript" src="../scripts/login.js"></script>
+    <script type="text/javascript" src="../scripts/main.js"></script>
+
 
   </body>
   </html>
