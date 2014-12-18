@@ -45,10 +45,11 @@ $(document).ready(function(){
     sendMessage(name,password,loginUrl);
     });
 
-  $('#cancel').on("click",function(event){
-    event.preventDefault();
-    window.location.href = "../index.html";
-  });
+    $('#register').on("click",function(event){
+      event.preventDefault();
+       window.location.href = "/register";
+      });
+
 });
 
 var sendMessage = function(name,password,loginUrl){

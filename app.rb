@@ -70,6 +70,7 @@ class LoginScreen < Sinatra::Base
       return true
   end
 
+  set :views, settings.root + '/public/views'
   get '/register' do
     erb :register
   end
