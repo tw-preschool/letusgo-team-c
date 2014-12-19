@@ -1,7 +1,8 @@
 require 'active_record'
 require 'sinatra/activerecord/rake'
 require 'logger'
-require 'yaml'  
+require 'yaml'
+require './app'  
 
 desc "Migrate the database through scripts in db/."
 task :migrate => :environment do

@@ -59,20 +59,37 @@ var sendMessage = function(name,password,loginUrl){
     data: {"name":name,"password":password},
     dataType: "json",
     success: function(data){
-      if(data === true && loginUrl == "/login"){
-        alert("管理员登陆成功!");
-        window.location.href = "/admin";
-      }
-      else if(data === true && loginUrl == "/customlogin")
-      {
-         alert("用户登陆成功");
-         window.location.href = "/views/items";
-      }
-      else{
-         alert("登陆失败，请重新登陆!");
-         window.location.href = "/login";
-      }
+    if(loginUrl == "/login"){
+      if(data === true )
+        {
+            alert("管理员登陆成功!");
+            window.location.href = "/admin";
+        }
+       else
+         {
+              alert("登陆失败，请重新登陆!");
+              window.location.href = "/login";
+         }
 
+      }
+     if(loginUrl == "/customlogin")
+      {
+        if(data === "user_not_exit")
+          {
+            alert("用户不存在，请重新输入用户名!");
+            window.location.href = "/login";
+          }
+       else if(data == "password_error")
+          {
+            alert("输入密码错误，请从新输入");
+            window.location.href = "/login";
+          }
+        else
+          {
+            alert("用户登陆成功");
+            window.location.href = "/views/items";
+          }
+      }
     }
   });
 };

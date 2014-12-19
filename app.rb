@@ -8,6 +8,7 @@ require 'json'
 require './models/product'
 require './models/item'
 require './models/order'
+require './models/customer_information.rb'
 require './controllers/cart_controller'
 
 
@@ -66,21 +67,55 @@ class LoginScreen < Sinatra::Base
     end
   end
 
-  post '/register' do
-      return true
+  post "/customlogin" do
+      if customer_information = Customer_information.where(:countname => params[:name]).first
+          if customer_information.password == params[:password]
+             session[:name] = customer_information.countname
+             session[:login] = true
+             return true.to_json
+          else
+             return "password_error".to_json
+          end
+      else
+      return "user_not_exit".to_json
+      end
   end
 
-  set :views, settings.root + '/public/views'
+
+  post '/judgeregister'do
+    if customer_information = Customer_information.where(:countname => params[:customerEmail]).first
+       return true.to_json
+    else
+       return false.to_json
+     end
+  end
+
+  post '/register' do
+   if  customer = Customer_information.where(:countname => params[:customerEmail]).first
+       return false.to_json
+  else
+     customer_information = Customer_information.new(
+      :countname => params[:customerEmail],
+      :password => params[:customerPassword],
+      :name => params[:customerName],
+      :address => params[:customerAddress],
+      :phone => params[:customerTelephone] )
+      if customer_information.save
+         [201, {:message => "customer_informations/#{customer_information.id}", :customer_informationId => customer_information.id}.to_json]
+       else
+         halt 500, {:message => "create customer failed"}.to_json
+       end
+   end
+end
+
   get '/register' do
     erb :register
   end
-
-
 end
 
 
 class POSApplication < Sinatra::Base
-  use LoginScreen
+    use LoginScreen
     set :views, settings.root + '/public/views'
     dbconfig = YAML.load(File.open("config/database.yml").read)
 

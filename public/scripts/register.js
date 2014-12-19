@@ -90,33 +90,60 @@ $(document).ready(function(){
         }
       }
     }
+  /*  alert(sendJudgeInformation(customerEmail));
+    if(sendJudgeInformation(customerEmail))
+      {
+        return;
+      }*/
+
 
     if(isCusEmail === true && isCusPassword === true && isCusName === true &&
        isCusAddress !== false && isCusTel === true){
-      alert("注册成功");
-      sendMessage(customerEmail,customerPassword,customerName,customerAddress,customerTelephone);
+       sendInformation(customerEmail,customerPassword,customerName,customerAddress,customerTelephone);
     }else{
-      alert("注册失败");
+       alert("注册失败");
     }
 
   });
 });
 
-  var sendMessage = function(name,password){
-    $.ajax({
-      type: "POST",
-      url: "/register",
-      data: {"customerEmail":customerEmail,"customerPassword":customerPassword,"customerName":customerName,
-             "customerAddress":customerAddress,"customerTelephone":customerTelephone},
-      dataType: "json",
-      success: function(data){
-        if(data === true){
+var sendInformation = function(customerEmail,customerPassword,customerName,customerAddress,customerTelephone){
+  $.ajax({
+    type: "POST",
+    url: "/register",
+    data: {"customerEmail":customerEmail, "customerPassword":customerPassword, "customerName":customerName,
+           "customerAddress":customerAddress, "customerTelephone":customerTelephone},
+    dataType: "json",
+    success: function(data){
+      if(data == false)
+        {
+          alert("该用户已经存在!");
+        }
+      else
+        {lo
           alert("注册成功!");
           window.location.href = "/";
-        }else{
-          alert("注册失败");
         }
+    },
+    error:function(data){
+      alert(data);
+    }
+  });
+};
 
+/*var sendJudgeInformation = function(customerEmail){
+  var temptValue = false;
+  $.ajax({
+    type: "POST",
+    url: "/judgeregister",
+    data: {"customerEmail":customerEmail},
+    dataType:"json",
+    success: function(data){
+      if(data === true){
+        alert("该用户已存在");
+        temptValue = true;
       }
-    });
-  };
+    }
+  });
+  return temptValue;
+}*/
