@@ -8,12 +8,10 @@ $(document).ready(function(){
         dataType: "json",
         success: function(data){
         if(data === false){
-          alert("用户未登陆，请重新登陆!");
           return;
          }
          else
            {
-             alert("用户退出成功");
              window.location.href = "/login";
            }
         }
@@ -62,12 +60,10 @@ var sendMessage = function(name,password,loginUrl){
     if(loginUrl == "/login"){
       if(data === true )
         {
-            alert("管理员登陆成功!");
             window.location.href = "/admin";
         }
        else
          {
-              alert("登陆失败，请重新登陆!");
               window.location.href = "/login";
          }
 
