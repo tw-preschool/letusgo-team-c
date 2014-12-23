@@ -84,3 +84,7 @@ input:required:valid{
 .product-information-error {
 	color:red;
 }
+
+.shopping-cart {
+	display: none;
+}
