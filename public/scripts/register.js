@@ -120,7 +120,7 @@ var sendInformation = function(customerEmail,customerPassword,customerName,custo
           alert("该用户已经存在!");
         }
       else
-        {lo
+        {
           alert("注册成功!");
           window.location.href = "/";
         }
