@@ -1,37 +1,4 @@
-<!doctype html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <title>Pos Web</title>
-  <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
-  <link rel="stylesheet" href="../styles/main.css"/>
-</head>
-
-<body>
-
-  <nav class="navbar navbar-inverse" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">Let's Go</a>
-      </div>
-      <div>
-        <ul class="nav navbar-nav">
-          <li><a href="../index.html">主页</a></li>
-          <li><a href="/orders">订单管理</a></li>
-          <li class="active"><a href="#">Admin</a></li>
-        </ul>
-      </div>
-      <div class="pull-right">
-        <ul class="nav navbar-nav">
-         <li>
-          <a href="/shop"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车 (<span id="count"><%= @count %></span>)</a>
-        </li>
-        <li><a id="title-login" href="#"><span class="manager-authority"></span></a></li>
-        <li><a id="logout" href="#" ><span>退出</span></a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
+<%= erb :'layout/admin_header' %>
 
 <div class="container theme-showcase" role="main">
   <div class="panel panel-default">
@@ -108,16 +75,4 @@
    </form>
  </div>
 </div>
-<script type="text/javascript" src="../lib/jquery-2.1.1/jquery-2.1.1.js"></script>
-<script type="text/javascript" src="../lib/bootstrap-3.2.0-dist/js/bootstrap.js"></script>
-<script type="text/javascript" src="../lib/lodash-2.4.1/lodash.compat.js"></script>
-<script type="text/javascript" src="../scripts/model/item.js"></script>
-<script type="text/javascript" src="../scripts/model/promotion.js"></script>
-<script type="text/javascript" src="../scripts/utils.js"></script>
-<script type="text/javascript" src="../scripts/admin.js"></script>
-
-<script type="text/javascript" src="../scripts/login.js"></script>
-<script type="text/javascript" src="../scripts/main.js"></script>
-
- </body>
- </html>
+<%= erb :'layout/admin_footer' %>
