@@ -102,6 +102,14 @@ var showOrLoginUser = function(){
      else
        {
          $("#title-login").find("span").text(data);
+         if(data == "admin")
+           {
+             $("#orderManage").text("订单管理");
+           }
+          else
+            {
+              $("#orderManage").text("我的订单");
+            }
        }
     }
   });
