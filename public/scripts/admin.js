@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	$('#item-table').find('.edit-product').on('click', function(event) {
 		event.preventDefault();
 		var listItem = $(this).closest('tr');
@@ -34,7 +33,6 @@ $(document).ready(function() {
 		var check = this.checked;
 		changePromotionStatus(tr, check);
 	});
-
 });
 
 function openEditLayer(name, price, unit, number,information,listItem) {
