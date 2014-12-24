@@ -22,7 +22,9 @@
       </div>
       <div class="container row col-xs-１">
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="/shop"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车 (<span id="count"><%= @count %></span>)</a></li>
+          <% if @loginUser %>
+            <li><a href="/shop"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车 (<span id="count"><%= @count %></span>)</a></li>
+          <% end %>
           <li><a id="title-login" href="#"><span class="manager-authority"></span></a></li>
           <li><a id="logout" href="#" ><span>退出</span></a></li>
         </ul>
