@@ -17,8 +17,12 @@ $(document).ready(function () {
                 "unit": unit
             },
             dataType: "json",
-            complete: function(){
+            success: function(){
                 alert('Suceess add the product in cart!');
+            },
+            error: function() {
+                alert('用户请登录')
+                window.location.href = "/login";
             }
         });
     });
