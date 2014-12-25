@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Pos Web</title>
+  <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../styles/cart.css"/>
+  <link rel="stylesheet" href="../styles/main.css"/>
+</head>
+<body>
+
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand" href="#">Let's Go</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="../index.html">主页</a></li>
+          <li><a href="views/items">商品列表</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="/shop"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车(<span id="count"><%= @count %></span>)</a></li>
+          <li><a id="title-login" href="#"><span class="manager-authority"></span></a></li>
+          <li><a id="logout" href="/logout" ><span>退出</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>

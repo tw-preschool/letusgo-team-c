@@ -29,7 +29,7 @@ def show_shoppingcart
   	items.each do |item|
   		products.each do |product|
   			if item.name == product.name
-  			   item.promoted = product.promoted
+           item.update(promoted: product.promoted)
   			   next
   			end
   		end

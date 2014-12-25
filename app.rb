@@ -229,6 +229,7 @@ class POSApplication < Sinatra::Base
     end
 
     get '/shop' do
+      redirect '/login' unless session[:name]
         show_shoppingcart
     end
 
