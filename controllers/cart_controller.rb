@@ -9,7 +9,7 @@ def load_products
 end
 
 def add_into_cart(name, price, unit, userid)
-    item = Item.where(:name => params['name']).first
+    item = Item.where(:name => params['name'], :customer_information_id => userid).first
     if  item.nil?
         item = Item.create(:name => name,
                    :price => price,
@@ -34,9 +34,9 @@ def show_shoppingcart
   			end
   		end
   	end
-
-  	@items = items;
-    @count = items.length
+    loginUser = find_login_user_id()
+  	@items = Item.where(customer_information_id: loginUser);
+    @count = @items.length
     erb :cart
 end
 
@@ -63,9 +63,15 @@ def delete_promotion(item_id)
 end
 
 def get_shoppingcart_num
-    Item.all.length
+    loginUser = find_login_user_id()
+    Item.where(customer_information_id: loginUser).length
 end
 
 def clear_shoppingcart
     Item.delete_all('id >= 1')
+end
+
+def find_login_user_id
+    customer = Customer_information.where(:countname => session[:name]).first
+    @loginUserId = customer ? customer.id : nil
 end

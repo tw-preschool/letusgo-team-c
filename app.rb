@@ -180,8 +180,7 @@ class POSApplication < Sinatra::Base
 
     get '/views/items' do
       @loginUser = session[:name]
-      customer = Customer_information.where(:countname => session[:name]).first
-      @loginUserId = customer ? customer.id : nil
+      @loginUserId = find_login_user_id()
       load_products
     end
 
@@ -230,7 +229,7 @@ class POSApplication < Sinatra::Base
 
     get '/shop' do
       redirect '/login' unless session[:name]
-        show_shoppingcart
+      show_shoppingcart
     end
 
     post '/deleteCartItem' do
