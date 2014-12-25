@@ -48,7 +48,7 @@ class LoginScreen < Sinatra::Base
     if(session[:login] == true)
       session[:login] = false
       session[:admin] = false
-      session[:name] = false
+      session[:name] = nil
       return true.to_json
     else
       session[:login] = false
@@ -179,6 +179,7 @@ class POSApplication < Sinatra::Base
     end
 
     get '/views/items' do
+      @loginUser = session[:name]
        load_products
     end
 
