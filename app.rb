@@ -180,11 +180,12 @@ class POSApplication < Sinatra::Base
 
     get '/views/items' do
       @loginUser = session[:name]
-       load_products
+      @loginUserId = find_login_user_id()
+      load_products
     end
 
     post '/items' do
-        add_into_cart(params[:name],params[:price],params[:unit])
+        add_into_cart(params[:name], params[:price], params[:unit], params[:userid])
     end
 
     get '/products/:id' do
@@ -227,7 +228,8 @@ class POSApplication < Sinatra::Base
     end
 
     get '/shop' do
-        show_shoppingcart
+      redirect '/login' unless session[:name]
+      show_shoppingcart
     end
 
     post '/deleteCartItem' do
