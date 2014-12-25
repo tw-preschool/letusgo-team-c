@@ -8,18 +8,18 @@ def load_products
     erb :items
 end
 
-def add_into_cart(name,price,unit)
+def add_into_cart(name, price, unit, userid)
     item = Item.where(:name => params['name']).first
     if  item.nil?
         item = Item.create(:name => name,
                    :price => price,
                    :unit => unit,
-                   :num => 1
+                   :num => 1,
+                   :customer_information_id => userid
                    )
     else
-        item.num += 1;
+        item.update(num: item.num + 1)
     end
-    item.save
 end
 
 def show_shoppingcart
