@@ -180,7 +180,9 @@ class POSApplication < Sinatra::Base
 
     get '/views/items' do
       @loginUser = session[:name]
-       load_products
+      customer = Customer_information.where(:countname => session[:name]).first
+      @loginUserId = customer ? customer.id : nil
+      load_products
     end
 
     post '/items' do
