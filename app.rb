@@ -281,7 +281,7 @@ class POSApplication < Sinatra::Base
         orders.each do |order|
             obj = JSON.parse order.details
             obj["guid"] = order.guid
-            obj["time"] = order.created_at
+            obj["time"] = order.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S")
             list.push(obj)
         end
         @count = get_shoppingcart_num
@@ -289,6 +289,7 @@ class POSApplication < Sinatra::Base
         erb :orderlist
     end
     get '/orders/:guid' do
+      redirect '/login' unless session[:login]
         order = Order.where(:guid => params[:guid]).first
         unless order.nil?
             obj = JSON.parse order.details
@@ -297,7 +298,7 @@ class POSApplication < Sinatra::Base
             @total = obj["totalMoney"]
             @subTotal = obj["totalSavingMoney"]
             @guid = order.guid
-            @time = order.created_at
+            @time = order.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S")
             @count = get_shoppingcart_num
             erb :order
         end
