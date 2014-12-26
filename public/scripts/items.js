@@ -1,5 +1,10 @@
 $(document).ready(function () {
     $("button[name='add']").click(function(){
+        var userid = $('#myshoppingcart').data('userid');
+        if(!userid) {
+            window.location.href = "/login";
+            return ;
+        }
         var tr = $(this).closest('tr');
         var id = parseInt(tr.attr('id'));
         var name = tr.children()[0].innerText;
@@ -14,11 +19,12 @@ $(document).ready(function () {
                 "id" : id,
                 "name": name,
                 "price": price,
-                "unit": unit
+                "unit": unit,
+                "userid": userid
             },
             dataType: "json",
-            complete: function(){
-                alert('Suceess add the product in cart!');
+            success: function(){
+    
             }
         });
     });

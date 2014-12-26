@@ -49,6 +49,7 @@ class LoginScreen < Sinatra::Base
     if(session[:login] == true)
       session[:login] = false
       session[:admin] = false
+      session[:name] = nil
       return true.to_json
     else
       session[:login] = false
@@ -184,11 +185,13 @@ class POSApplication < Sinatra::Base
     end
 
     get '/views/items' do
-       load_products
+      @loginUser = session[:name]
+      @loginUserId = find_login_user_id()
+      load_products
     end
 
     post '/items' do
-        add_into_cart(params[:name],params[:price],params[:unit])
+        add_into_cart(params[:name], params[:price], params[:unit], params[:userid])
     end
 
     get '/products/:id' do
@@ -231,7 +234,8 @@ class POSApplication < Sinatra::Base
     end
 
     get '/shop' do
-        show_shoppingcart
+      redirect '/login' unless session[:name]
+      show_shoppingcart
     end
 
     post '/deleteCartItem' do
@@ -255,12 +259,24 @@ class POSApplication < Sinatra::Base
     end
 
     post '/payment' do
-        Order.create(:guid => params[:guid] ,:details => params[:list]).save
+      if session[:name] == false
+       [404, {:message => e.message}.to_json ]
+      else
+        Order.create(:guid => params[:guid] ,:details => params[:list],:countname => session[:name]).save
+      end
+
     end
 
     get '/orders' do
-        redirect '/login' unless session[:admin]
-        orders = Order.find_by_sql(['select * from orders order by created_at DESC']) || []
+        if session[:login] == true
+          if  session[:admin] == true
+             orders = Order.find_by_sql(['select * from orders order by created_at DESC']) || []
+         else
+             orders = Order.find_by_sql(["select * from orders where countname = '"+session[:name]+"' order by created_at DESC"]) || []
+         end
+       else
+         redirect '/login'
+       end
         list = []
         orders.each do |order|
             obj = JSON.parse order.details

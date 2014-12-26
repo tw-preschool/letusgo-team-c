@@ -1,5 +1,4 @@
 $(document).ready(function() {
-
 	$('#item-table').find('.edit-product').on('click', function(event) {
 		event.preventDefault();
 		var listItem = $(this).closest('tr');
@@ -34,12 +33,11 @@ $(document).ready(function() {
 		var check = this.checked;
 		changePromotionStatus(tr, check);
 	});
-
 });
 
 function openEditLayer(name, price, unit, number,information,listItem) {
+	clearLayer();
 	$('.overlay').find('#submit').text('更新');
-	$('#product-form')[0].reset();
 	$('.overlay').find('#name').val(name);
 	$('.overlay').find('#price').val(price);
 	$('.overlay').find('#unit').val(unit);
@@ -49,7 +47,7 @@ function openEditLayer(name, price, unit, number,information,listItem) {
 	$('.overlay').find('#submit').off();
 	$('.overlay').find('#submit').on('click', function(event){
 		event.preventDefault();
-	  if (!depictionChecking())
+	  if (!validateInputInfo())
 		{
 			return;
 		}
@@ -59,14 +57,13 @@ function openEditLayer(name, price, unit, number,information,listItem) {
 }
 
 function openAddLayer() {
+	clearLayer();
 	$('.overlay').find('#submit').text('添加');
 	$('.overlay').fadeIn();
-
-	$('#product-form')[0].reset();
 	$('.overlay').find('#submit').off();
 	$('.overlay').find('#submit').on('click', function(event){
 		event.preventDefault();
-		if (!depictionChecking())
+		if (!validateInputInfo())
 		{
 			return;
 		}
@@ -124,7 +121,6 @@ function changePromotionStatus(tr, check) {
 function addProduct(name, price, unit, number,information,promoted) {
 	$.ajax('/add', {
 		success: function(response) {
-			alert("success");
 			showAddProductLine(name, price, unit, number,information, promoted, response.productId)
 		},
 		type: 'post',
@@ -171,15 +167,28 @@ function generateNewProductItem(name, price, unit, number,information, promoted,
 	return listItem;
 }
 
-function depictionChecking()
-{
-	if($('.overlay').find('#information').val().length > 10)
-		{
-			alert("商品描述信息上限为10个字，请重新输入");
-			return false;
-		}
-  else
-		{
-			return true;
-		}
+function priceChecking() {
+	var price = /^[0-9]+(\.[0-9]*)?$/;
+	return price.test($('.overlay').find('#price').val()) ? "" : "商品单价设置不合理，请重新输入<br/>";
+}
+
+function productNumChecking() {
+	var numberReg = /^[0-9]+$/;
+	return numberReg.test($('.overlay').find('#number').val()) ? "" : "数量格式不正确，请重新输入<br/>";
+}
+
+function depictionChecking() {
+	return $('.overlay').find('#information').val().length <= 10 ? "" : "商品描述信息上限为10个字，请重新输入<br/>";
+}
+
+function validateInputInfo() {
+	var error_message = "";
+	error_message += priceChecking() + productNumChecking() + depictionChecking();
+	$('.product-information-error').html(error_message);
+	return error_message == "";
+}
+
+function clearLayer() {
+	$('.product-information-error').html("");
+	$('#product-form')[0].reset();
 }

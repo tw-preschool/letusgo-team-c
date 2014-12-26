@@ -8,12 +8,10 @@ $(document).ready(function(){
         dataType: "json",
         success: function(data){
         if(data === false){
-          alert("用户未登陆，请重新登陆!");
           return;
          }
          else
            {
-             alert("用户退出成功");
              window.location.href = "/login";
            }
         }
@@ -59,36 +57,33 @@ var sendMessage = function(name,password,loginUrl){
     data: {"name":name,"password":password},
     dataType: "json",
     success: function(data){
-    if(loginUrl == "/login"){
-      if(data === true )
+      if(loginUrl == "/login"){
+        if(data === true )
         {
-            alert("管理员登陆成功!");
-            window.location.href = "/admin";
+          window.location.href = "/admin";
         }
-       else
-         {
-              alert("登陆失败，请重新登陆!");
-              window.location.href = "/login";
-         }
+        else
+        {
+          window.location.href = "/login";
+        }
 
       }
-     if(loginUrl == "/customlogin")
+      if(loginUrl == "/customlogin")
       {
         if(data === "user_not_exit")
-          {
-            alert("用户不存在，请重新输入用户名!");
-            window.location.href = "/login";
-          }
-       else if(data == "password_error")
-          {
-            alert("输入密码错误，请从新输入");
-            window.location.href = "/login";
-          }
+        {
+          alert("用户不存在，请重新输入用户名!");
+          window.location.href = "/login";
+        }
+        else if(data == "password_error")
+        {
+          alert("输入密码错误，请从新输入");
+          window.location.href = "/login";
+        }
         else
-          {
-            alert("用户登陆成功");
-            window.location.href = "/views/items";
-          }
+        {
+          window.location.href = "/views/items";
+        }
       }
     }
   });
@@ -107,6 +102,14 @@ var showOrLoginUser = function(){
      else
        {
          $("#title-login").find("span").text(data);
+         if(data == "admin")
+           {
+             $("#orderManage").text("订单管理");
+           }
+          else
+            {
+              $("#orderManage").text("我的订单");
+            }
        }
     }
   });

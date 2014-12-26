@@ -80,3 +80,11 @@ input:required:valid{
   display: none;
   color: red;
 }
+
+.product-information-error {
+	color:red;
+}
+
+.shopping-cart {
+	display: none;
+}

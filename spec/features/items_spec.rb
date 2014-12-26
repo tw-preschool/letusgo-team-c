@@ -3,19 +3,12 @@ require_relative '../spec_helper'
 
 describe 'Shopping Cart:' do
   before :each do
-    Item.create(name: '红牛', price: 2.30, unit: '罐', num: 1)
-    Item.create(name: '雪碧', price: 3.00, unit: '瓶', num: 3)
-  end
-
-  describe ' visting shopping cart ' do    
-    it 'is successful' do
-      get '/shop'
-      expect(last_response.status).to eq 200
-    end
+    Item.create(name: '红牛', price: 2.30, unit: '罐', num: 1, customer_information_id: 2)
+    Item.create(name: '雪碧', price: 3.00, unit: '瓶', num: 3, customer_information_id: 2)
   end
 
   describe ' adding an item in shopping cart ' do    
-  	let(:body) { {:name => "Mac Book Pro", :price => 13456.89, :unit => "台"} }
+  	let(:body) { {:name => "Mac Book Pro", :price => 13456.89, :unit => "台", :userid => 2} }
     before { post '/items', body, {'Content-Type' => 'application/json'} }
 
     it 'is successful' do
