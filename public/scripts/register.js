@@ -13,7 +13,6 @@ $(document).ready(function(){
 
   $('#register').on("click",function(event){
     event.preventDefault();
-
     var customerEmail = $('#customerEmail').val();
     var customerPassword  = $('#customerPassword').val();
     var customerName  = $('#customerName').val();
@@ -46,7 +45,7 @@ $(document).ready(function(){
       $('#customerPassword_wrong').hide();
     }
 
-    var nameReg = /^[a-z ]{1,100}$/;
+    var nameReg = /^[a-z]{3,100}$/;
     var isCusName  = isCheck(customerName,nameReg);
     if(customerName === ""){
       $('#customerName_null').show();
@@ -59,7 +58,7 @@ $(document).ready(function(){
       $('#customerName_wrong').hide();
     }
 
-    var addressReg  = /^[a-z 0-9.-]{1,100}$/;
+    var addressReg  = /^[a-z0-9.-]+[" "]?[a-z0-9.-]+/;
     var isCusAddress = isCheck(customerAddress,addressReg);
     if(isCusAddress === false){
       $('#customerAddress_wrong').show();
@@ -90,16 +89,10 @@ $(document).ready(function(){
         }
       }
     }
-  /*  alert(sendJudgeInformation(customerEmail));
-    if(sendJudgeInformation(customerEmail))
-      {
-        return;
-      }*/
-
 
     if(isCusEmail === true && isCusPassword === true && isCusName === true &&
-       isCusAddress !== false && isCusTel === true){
-       sendInformation(customerEmail,customerPassword,customerName,customerAddress,customerTelephone);
+      isCusAddress !== false && isCusTel === true){
+      sendInformation(customerEmail,customerPassword,customerName,customerAddress,customerTelephone);
     }else{
        alert("注册失败");
     }
@@ -121,7 +114,7 @@ var sendInformation = function(customerEmail,customerPassword,customerName,custo
         }
       else
         {
-          alert("您已注册成功，请查收邮件！");
+          // alert("您已注册成功，请查收邮件！");
           window.location.href = "/";
         }
     },
