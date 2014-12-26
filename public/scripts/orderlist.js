@@ -2,16 +2,6 @@ $(document).ready(function() {
     addRemoveOrderHandler();
 });
 
-function changeNavHighlight() {
-    if(window.location.pathname == '/orders') {
-        $('.product-manage').removeClass('active');
-        $('.order-manage').addClass('active');
-    } else {
-        $('.product-manage').addClass('active');
-        $('.order-manage').removeClass('active');
-    }
-}
-
 function addRemoveOrderHandler() {
     $("[name='remove']").click(function() {
         var guid = $(this).attr("id");

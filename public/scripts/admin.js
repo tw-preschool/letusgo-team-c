@@ -1,4 +1,5 @@
 $(document).ready(function() {
+	changeNavHighlight();
 	$('#item-table').find('.edit-product').on('click', function(event) {
 		event.preventDefault();
 		var listItem = $(this).closest('tr');
@@ -34,6 +35,16 @@ $(document).ready(function() {
 		changePromotionStatus(tr, check);
 	});
 });
+
+function changeNavHighlight() {
+    if(window.location.pathname == '/admin') {
+        $('.product-manage').addClass('active');
+        $('.order-manage').removeClass('active');
+    } else if (window.location.pathname == '/orders') {
+        $('.product-manage').removeClass('active');
+        $('.order-manage').addClass('active');
+    }
+}
 
 function openEditLayer(name, price, unit, number,information,listItem) {
 	clearLayer();
