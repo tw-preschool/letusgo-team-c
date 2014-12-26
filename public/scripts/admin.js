@@ -43,6 +43,9 @@ function changeNavHighlight() {
     } else if (window.location.pathname == '/orders') {
         $('.product-manage').removeClass('active');
         $('.order-manage').addClass('active');
+    } else if (window.location.pathname.indexOf('/orders/') != -1 ) {
+    		$('.product-manage').removeClass('active');
+        $('.order-manage').addClass('active');
     }
 }
 

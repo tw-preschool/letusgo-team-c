@@ -1,5 +1,8 @@
-<%= erb :"layout/customer_header" %>
-
+<% if session[:admin] %>
+<%= erb :'layout/admin_header' %>
+<% else %>
+<%= erb :'layout/customer_header' %>
+<% end %>
   <div class="container theme-showcase" role="main">
     <div class="panel panel-default">
       <table class="shopping-list table table-bordered back"  style="table-layout:fixed">
@@ -11,6 +14,7 @@
                 <span class="glyphicon glyphicon-arrow-left goback">返回</span>
                 </a>
               </h3>
+              <h3 class="order_title"><strong>所属用户:<%= @username %></strong></h3>
               <h3 class="order_title"><strong>订购时间:<%= @time %></strong></h3>
               <h4 class="details">订单明细</h4>
             </th>
@@ -68,4 +72,8 @@
       </table>
     </div>
   </div>
-<%= erb :"layout/customer_footer" %>
+<% if session[:admin] %>
+<%= erb :'layout/admin_footer' %>
+<% else %>
+<%= erb :'layout/customer_footer' %>
+<% end %>

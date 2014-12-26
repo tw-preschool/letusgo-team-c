@@ -291,6 +291,7 @@ class POSApplication < Sinatra::Base
     get '/orders/:guid' do
       redirect '/login' unless session[:login]
         order = Order.where(:guid => params[:guid]).first
+        @username = order.countname
         unless order.nil?
             obj = JSON.parse order.details
             @shopping_items = obj["shopping_items"]
