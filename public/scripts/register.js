@@ -115,13 +115,13 @@ var sendInformation = function(customerEmail,customerPassword,customerName,custo
            "customerAddress":customerAddress, "customerTelephone":customerTelephone},
     dataType: "json",
     success: function(data){
-      if(data == false)
+      if(data === false)
         {
           alert("该用户已经存在!");
         }
       else
         {
-          alert("注册成功!");
+          alert("您已注册成功，请查收邮件！");
           window.location.href = "/";
         }
     },

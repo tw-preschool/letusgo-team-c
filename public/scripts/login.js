@@ -23,7 +23,7 @@ $(document).ready(function(){
   var loginUrl="/login";
   $(":radio").each(function(){
     $(this).click(function(){
-      if(this.checked == true)
+      if(this.checked === true)
         {
           if($(this).attr("id") == "customLogin")
             loginUrl = "/customlogin";

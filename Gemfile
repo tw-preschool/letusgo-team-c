@@ -7,6 +7,7 @@ gem 'activerecord'
 gem 'sinatra-activerecord'
 gem 'rack-contrib'
 gem 'thin'
+gem 'mailfactory'
 
 group :development, :test do
   	gem 'rack-test'
