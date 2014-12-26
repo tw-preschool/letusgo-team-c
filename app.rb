@@ -10,7 +10,7 @@ require './models/item'
 require './models/order'
 require './models/customer_information.rb'
 require './controllers/cart_controller'
-require './confirm_mail.rb'
+# require './confirm_mail.rb'
 
 
 class LoginScreen < Sinatra::Base
@@ -284,6 +284,7 @@ class POSApplication < Sinatra::Base
             obj["time"] = order.created_at
             list.push(obj)
         end
+        @count = get_shoppingcart_num
         @orderlist = list
         erb :orderlist
     end
@@ -291,13 +292,13 @@ class POSApplication < Sinatra::Base
         order = Order.where(:guid => params[:guid]).first
         unless order.nil?
             obj = JSON.parse order.details
-            #puts obj["shopping_items"]
             @shopping_items = obj["shopping_items"]
             @promotion_items = obj["promotion_items"]
             @total = obj["totalMoney"]
             @subTotal = obj["totalSavingMoney"]
             @guid = order.guid
             @time = order.created_at
+            @count = get_shoppingcart_num
             erb :order
         end
     end

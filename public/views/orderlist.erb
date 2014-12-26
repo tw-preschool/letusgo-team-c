@@ -1,5 +1,5 @@
 
-<%= erb :'layout/admin_header' %>
+<%= erb :'layout/customer_header' %>
   <div class="container theme-showcase order_border" role="main">
     <% if @orderlist.nil? || @orderlist.length == 0  %>
       <h1>当前无任何订单,请前往<a href="/views/items">商品列表</a>进行购买！</h1>
@@ -20,4 +20,4 @@
     <% end %>
   </div>
 
-<%= erb :'layout/admin_footer' %>
+<%= erb :'layout/customer_footer' %>

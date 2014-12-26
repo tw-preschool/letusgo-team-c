@@ -68,7 +68,8 @@ def get_shoppingcart_num
 end
 
 def clear_shoppingcart
-    Item.delete_all('id >= 1')
+    loginUser = find_login_user_id()
+    Item.delete_all(customer_information_id: loginUser)
 end
 
 def find_login_user_id
