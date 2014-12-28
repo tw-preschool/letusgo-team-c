@@ -114,7 +114,7 @@ var sendInformation = function(customerEmail,customerPassword,customerName,custo
         }
       else
         {
-          // alert("您已注册成功，请查收邮件！");
+          alert("您已注册成功，请查收邮件！");
           window.location.href = "/";
         }
     },

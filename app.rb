@@ -10,7 +10,7 @@ require './models/item'
 require './models/order'
 require './models/customer_information.rb'
 require './controllers/cart_controller'
-# require './confirm_mail.rb'
+require './confirm_mail.rb'
 
 
 class LoginScreen < Sinatra::Base
@@ -103,7 +103,7 @@ class LoginScreen < Sinatra::Base
       :name => params[:customerName],
       :address => params[:customerAddress],
       :phone => params[:customerTelephone] )
-      # sendmail(params[:customerEmail],params[:customerName])
+      sendmail(params[:customerEmail],params[:customerName])
       if customer_information.save
          [201, {:message => "customer_informations/#{customer_information.id}", :customer_informationId => customer_information.id}.to_json]
       else
