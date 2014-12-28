@@ -153,7 +153,11 @@
                  list: JSON.stringify(payment_list)
              },
               function(data) {
-                // location.href = '/orders';
+                location.href = '/orders';
              });
+
+         $.post("/close", function(data) {
+
+         });
         });
  });

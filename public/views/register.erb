@@ -3,93 +3,88 @@
 <head>
   <meta charset="UTF-8">
   <title>Pos Web</title>
-  <link rel="stylesheet" href="../styles/main.css"/>
   <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="../styles/main.css"/>
 </head>
 <body>
-  <nav class="navbar navbar-inverse" role="navigation">
-    <div class="navbar-header">
-      <ul class="nav navbar-nav">
-        <li>
-          <a href="#">Let's Go</a>
-        </li>
-        <li>
-          <a href="../index.html">主页</a>
-        </li>
-        <li>
-          <a href="/views/items.html">商品列表</a>
-        </li>
-        <li class="active"><a id="admin" href="/judgelogin">商品管理</a></li>
-        <li><a id="orderManage" href="/orders"></a></li>
-      </ul>
-    </div>
-    <div class="pull-right">
-      <ul class="nav navbar-nav">
-      <li><a href="/shop"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车</a></li>
-      <li><a id="title-login" href="#"><span class="manager-authority"></span></a></li>
-      <li><a id="logout" href="#" ><span>退出</span></a></li>
-      </ul>
+  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        </button>
+        <a class="navbar-brand" href="/views/items">Let's Go</a>
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+          <li class="homepage"><a href="../index.html">主页</a></li>
+          <li class="product-list"><a href="/views/items">商品列表</a></li>
+          <li class="myorder"><a id="orderManage" href="/orders"></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/login"><span>登录</span></a></li>
+          <li class="active"><a href="/register" ><span>注册</span></a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
-
   <div class="container theme-showcase" role="main">
-<!--   <div class="panel panel-default"  > -->
-      <table id="item-talbe"  >
-        <thead class="table-clo">
-          <div class="active" style="text-align:center;background:#ccc;border-radius:4px;">
-            <h1><srong>用户注册</strong></h1>
-          </div>
-        </thead>
-        <tbody>
-          <div class="form-group">
-            <label for="customerEmail">账号</label>
-            <dd class="clearfix">
-              <input type="email" id="customerEmail" style="border-radius:4px;height:34px;width:40%;"
-                     required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-                     autofocus autocomplete="off" placeholder="Please input your common mailbox." >
-              <span class="ic_plaint" id="customerEmail_null">账号不能为空</span>
-              <span class="ic_plaint" id="customerEmail_wrong">请输入正确的email</span>
-            </dd>
-          </div>
-          <div class="form-group">
-            <label for="customerPassword">密码</label>
-            <dd class="clearfix">
-              <input type="password" id="customerPassword" style="border-radius:4px;height:34px;width:40%;min:6"
-                     required="required" pattern="[a-z0-9]{6,25}" placeholder="Please input your password.">
-              <span class="ic_plaint" id="customerPassword_null">密码不能为空</span>
-              <span class="ic_plaint" id="customerPassword_wrong">6-25个字符（字母、数字的组合）</span>
-            </dd>
-          </div>
-          <div class="form-group">
-            <label for="customerName">姓名</label>
-            <dd class="clearfix">
-              <input type="text" id="customerName" style="border-radius:4px;height:34px;width:40%;"
-                     required="required" pattern="[a-z ]{1,100}"placeholder="Please input your name.">
-              <span class="ic_plaint" id="customerName_null">姓名不能为空</span>
-              <span class="ic_plaint" id="customerName_wrong">姓名中不可包含数字或下划线或特殊字符</span>
-            </dd>
-          </div>
-          <div class="form-group">
-            <label for="customerAddress">地址</label>
-            <dd class="clearfix">
-              <input type="text" id="customerAddress" style="border-radius:4px;height:34px;width:40%;"
-                     required="required" pattern="[a-z0-9.- ]{1,100}" placeholder="Please input your address.">
-              <span class="ic_plaint" id="customerAddress_wrong">请输入正确地址</span>
-            </dd>
-          </div>
-          <div class="form-group">
-            <label for="customerTelephone">电话</label>
-            <dd class="clearfix">
-              <input type="tel" id="customerTelphone" style="border-radius:4px;height:34px;width:40%;"
-                     required="required" pattern="[0-9]{8,11}" placeholder="Please input your telephone.">
-               <span class="ic_plaint" id="customerTelphone_null">电话号码不能为空</span>
-              <span class="ic_plaint" id="customerTelphone_wrong">请输入8~11位正确电话号码</span>
-            </dd>
-          </div>
-          <button id="register" class="btn btn-primary">注册</button>
-        </tbody>
-      </table>
+
+    <table id="item-talbe"  >
+      <thead class="table-clo">
+        <div class="active" style="text-align:center;background:#ccc;border-radius:4px;">
+          <h1><srong>用户注册</strong></h1>
+        </div>
+      </thead>
+      <tbody>
+        <div class="form-group">
+          <label for="customerEmail">账号</label>
+          <dd class="clearfix">
+            <input type="email" id="customerEmail" style="border-radius:4px;height:34px;width:40%;"
+            required="required" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+            autofocus autocomplete="off" placeholder="Please input your common mailbox." >
+            <span class="ic_plaint" id="customerEmail_null">账号不能为空</span>
+            <span class="ic_plaint" id="customerEmail_wrong">请输入正确的email</span>
+          </dd>
+        </div>
+        <div class="form-group">
+          <label for="customerPassword">密码</label>
+          <dd class="clearfix">
+            <input type="password" id="customerPassword" style="border-radius:4px;height:34px;width:40%;min:6"
+            required="required" pattern="[a-z0-9]{6,25}" placeholder="Please input your password.">
+            <span class="ic_plaint" id="customerPassword_null">密码不能为空</span>
+            <span class="ic_plaint" id="customerPassword_wrong">6-25个字符（字母、数字的组合）</span>
+          </dd>
+        </div>
+        <div class="form-group">
+          <label for="customerName">姓名</label>
+          <dd class="clearfix">
+            <input type="text" id="customerName" style="border-radius:4px;height:34px;width:40%;"
+            required="required" pattern="[a-z]{3,100}"placeholder="Please input your name.">
+            <span class="ic_plaint" id="customerName_null">姓名不能为空</span>
+            <span class="ic_plaint" id="customerName_wrong">姓名中不可包含数字或下划线或特殊字符</span>
+          </dd>
+        </div>
+        <div class="form-group">
+          <label for="customerAddress">地址</label>
+          <dd class="clearfix">
+            <input type="text" id="customerAddress" style="border-radius:4px;height:34px;width:40%;"
+            required="required" pattern="^[a-z0-9.-]+[" "]?[a-z0-9.-]+" placeholder="Please input your address.">
+            <span class="ic_plaint" id="customerAddress_wrong">请输入正确地址</span>
+          </dd>
+        </div>
+        <div class="form-group">
+          <label for="customerTelephone">电话</label>
+          <dd class="clearfix">
+            <input type="tel" id="customerTelphone" style="border-radius:4px;height:34px;width:40%;"
+            required="required" pattern="[0-9]{8,11}" placeholder="Please input your telephone.">
+            <span class="ic_plaint" id="customerTelphone_null">电话号码不能为空</span>
+            <span class="ic_plaint" id="customerTelphone_wrong">请输入8~11位正确电话号码</span>
+          </dd>
+        </div>
+        <button id="register" class="btn btn-primary">注册</button>
+      </tbody>
+    </table>
   </div>
   <script type="text/javascript" src="../lib/jquery-2.1.1/jquery-2.1.1.js"></script>
   <script type="text/javascript" src="../lib/bootstrap-3.2.0-dist/js/bootstrap.js"></script>
@@ -97,8 +92,6 @@
   <script type="text/javascript" src="../scripts/model/item.js"></script>
   <script type="text/javascript" src="../scripts/model/promotion.js"></script>
   <script type="text/javascript" src="../scripts/utils.js"></script>
-  <script type="text/javascript" src="../scripts/admin.js"></script>
   <script type="text/javascript" src="../scripts/register.js"></script>
-  <script type="text/javascript" src="../scripts/login.js"></script>
 </body>
 </html>

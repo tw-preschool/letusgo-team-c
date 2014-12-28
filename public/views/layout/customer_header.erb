@@ -6,6 +6,7 @@
   <link href="../lib/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="../styles/cart.css"/>
   <link rel="stylesheet" href="../styles/main.css"/>
+  <link rel="stylesheet" href="../styles/orderlist.css"/>
 </head>
 <body>
 
@@ -18,12 +19,12 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-          <li><a href="../index.html">主页</a></li>
-          <li><a href="/views/items">商品列表</a></li>
-          <li><a id="orderManage" href="/orders"></a></li>
+          <li class="homepage"><a href="../index.html">主页</a></li>
+          <li class="product-list"><a href="/views/items">商品列表</a></li>
+          <li class="myorder"><a id="orderManage" href="/orders"></a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-          <li class="active"><a href="/shop"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车(<span id="count"><%= @count %></span>)</a></li>
+          <li><a href="/shop"><span class="glyphicon glyphicon-shopping-cart"></span> 购物车(<span id="count"><%= @count %></span>)</a></li>
           <li><a id="title-login" href="#"><span class="manager-authority"></span></a></li>
           <li><a id="logout" href="/logout" ><span>退出</span></a></li>
         </ul>

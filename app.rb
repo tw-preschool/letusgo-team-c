@@ -10,7 +10,7 @@ require './models/item'
 require './models/order'
 require './models/customer_information.rb'
 require './controllers/cart_controller'
-require './confirm_mail.rb'
+# require './confirm_mail.rb'
 
 
 class LoginScreen < Sinatra::Base
@@ -103,7 +103,7 @@ class LoginScreen < Sinatra::Base
       :name => params[:customerName],
       :address => params[:customerAddress],
       :phone => params[:customerTelephone] )
-      sendmail(params[:customerEmail],params[:customerName])
+      # sendmail(params[:customerEmail],params[:customerName])
       if customer_information.save
          [201, {:message => "customer_informations/#{customer_information.id}", :customer_informationId => customer_information.id}.to_json]
       else
@@ -281,23 +281,26 @@ class POSApplication < Sinatra::Base
         orders.each do |order|
             obj = JSON.parse order.details
             obj["guid"] = order.guid
-            obj["time"] = order.created_at
+            obj["time"] = order.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S")
             list.push(obj)
         end
+        @count = get_shoppingcart_num
         @orderlist = list
         erb :orderlist
     end
     get '/orders/:guid' do
+      redirect '/login' unless session[:login]
         order = Order.where(:guid => params[:guid]).first
+        @username = order.countname
         unless order.nil?
             obj = JSON.parse order.details
-            #puts obj["shopping_items"]
             @shopping_items = obj["shopping_items"]
             @promotion_items = obj["promotion_items"]
             @total = obj["totalMoney"]
             @subTotal = obj["totalSavingMoney"]
             @guid = order.guid
-            @time = order.created_at
+            @time = order.created_at.localtime.strftime("%Y-%m-%d %H:%M:%S")
+            @count = get_shoppingcart_num
             erb :order
         end
     end
