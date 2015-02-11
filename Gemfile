@@ -1,7 +1,6 @@
 source 'http://ruby.taobao.org'
 
 gem 'sinatra'
-gem "pg"
 gem 'sqlite3'
 gem 'activerecord'
 gem 'sinatra-activerecord'
